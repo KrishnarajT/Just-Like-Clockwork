@@ -35,6 +35,7 @@ const Home = () => {
 		getLapFromId,
 		updateWorkDoneByID,
 		getTotalAmountSum,
+		getTotalTimeSpent,
 	} = useContext(LapContext);
 
 	const UpdateCurrentWorkLapTime = (lapId, hours, minutes, seconds) => {
@@ -219,6 +220,50 @@ const Home = () => {
 						})}
 					</tbody>
 				</table>
+			</div>
+
+			<div className="w-full flex flex-col justify-center items-center my-10 outline p-6">
+				<div className="font-bold text-accent text-6xl">Stats</div>
+				<div className="stats shadow">
+					<div className="stat">
+						<div className="stat-figure text-secondary"></div>
+						<div className="stat-title text-xl">
+							Tasks Completed
+						</div>
+						<div className="stat-value text-primary text-6xl">
+							{laps.length}
+						</div>
+						<div className="stat-desc text-xl">
+							The Total number of laps.
+						</div>
+					</div>
+
+					<div className="stat">
+						<div className="stat-figure text-secondary"></div>
+						<div className="stat-title text-xl">
+							Total Minutes Spent Working
+						</div>
+						<div className="stat-value text-primary text-6xl">
+							{getTotalTimeSpent()}
+						</div>
+						<div className="stat-desc text-xl">
+							Sum of time on all laps.
+						</div>
+					</div>
+
+					<div className="stat">
+						<div className="stat-figure text-secondary"></div>
+						<div className="stat-title text-xl">
+							Total Amount Earned
+						</div>
+						<div className="stat-value text-primary text-6xl">
+							{"₹ " + getTotalAmountSum()}
+						</div>
+						<div className="stat-desc text-xl">
+							Sum of amount on all laps.
+						</div>
+					</div>
+				</div>
 			</div>
 
 			{/* footer */}
