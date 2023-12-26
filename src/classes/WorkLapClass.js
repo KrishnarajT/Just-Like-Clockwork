@@ -7,7 +7,8 @@ class WorkLap {
 		current_hours,
 		current_minutes,
 		current_seconds,
-		workDoneString
+		workDoneString,
+		amount
 	) {
 		this.id = uuidv4();
 		this.startTime = startTime;
@@ -16,11 +17,16 @@ class WorkLap {
 		this.current_minutes = current_minutes;
 		this.current_seconds = current_seconds;
 		this.workDoneString = workDoneString;
+		this.amount = amount;
 	}
 
 	// Getters
 	getId() {
 		return this.id;
+	}
+
+	getAmount() {
+		return this.amount;
 	}
 
 	getStartTime() {
@@ -70,6 +76,10 @@ class WorkLap {
 
 	setWorkDoneString(workDoneString) {
 		this.workDoneString = workDoneString;
+	}
+
+	setAmount(amount) {
+		this.amount = amount;
 	}
 }
 

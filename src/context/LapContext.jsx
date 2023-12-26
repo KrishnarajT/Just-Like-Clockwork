@@ -33,6 +33,16 @@ const LapProvider = ({ children }) => {
 		})[0];
 	};
 
+	const updateWorkDoneByID = (id, workDone) => {
+		const newLaps = laps.map((lap) => {
+			if (lap.id === id) {
+				lap.setWorkDoneString(workDone);
+			}
+			return lap;
+		});
+		setLaps(newLaps);
+	};
+
 	// update a lap
 	const updateLap = (lapId, hours, minutes, seconds) => {
 		const newLaps = laps.map((lap) => {
@@ -56,6 +66,7 @@ const LapProvider = ({ children }) => {
 				updateLap,
 				getLastLap,
 				getLapFromId,
+				updateWorkDoneByID,
 			}}
 		>
 			{children}

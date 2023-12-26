@@ -17,15 +17,23 @@ import { StartButton } from "../components/ui/StartButton";
 import TimerContinuous from "../components/TimerContinuous";
 
 const Home = () => {
-	const { laps, addLap, resetLaps, updateLap, getLastLap, getLapFromId } =
-		useContext(LapContext);
+	const {
+		laps,
+		addLap,
+		resetLaps,
+		updateLap,
+		getLastLap,
+		getLapFromId,
+		updateWorkDoneByID,
+	} = useContext(LapContext);
 
 	const UpdateCurrentWorkLapTime = (lapId, hours, minutes, seconds) => {
 		updateLap(lapId, hours, minutes, seconds);
 	};
 
 	const addNewLap = () => {
-		const newlap = new WorkLap(0, 0, 0, 0, 0, "");
+		const currentDate = new Date().toLocaleString();
+		const newlap = new WorkLap(currentDate, 0, 0, 0, 0, "", 0);
 		addLap(newlap);
 		return newlap.id;
 	};
@@ -147,10 +155,11 @@ const Home = () => {
 					{/* head */}
 					<thead className="">
 						<tr className="text-2xl">
-							<th>ID</th>
-							<th>Starttime</th>
-							<th>Current Time</th>
-							<th>Work Done</th>
+							<th className="w-4">ID</th>
+							<th className="w-48">Start Time</th>
+							<th className="w-24">Elapsed Time</th>
+							<th className="w-1/2 break-words">Work Done</th>
+							<th className="w-12">Amount</th>
 						</tr>
 					</thead>
 					<tbody>
@@ -162,17 +171,28 @@ const Home = () => {
 										{index + 1}
 									</td>
 									<td className="text-2xl">
-										{lap.getCurrentHours()}:
-										{lap.getCurrentMinutes()}:
-										{lap.getCurrentSeconds()}
+										{lap.getStartTime()}
 									</td>
 									<td className="text-2xl">
-										{lap.getCurrentHours()}:
-										{lap.getCurrentMinutes()}:
-										{lap.getCurrentSeconds()}
+										{lap.getCurrentHours()} Hours :{" "}
+										{lap.getCurrentMinutes()} Minutes :{" "}
+										{lap.getCurrentSeconds()} Seconds
+									</td>
+									<td className="text-2xl break-words">
+										<textarea
+											className="textarea textarea-bordered w-full rounded-lg"
+											placeholder="Type here"
+											value={lap.getWorkDoneString()}
+											onChange={(e) => {
+												updateWorkDoneByID(
+													lap.getId(),
+													e.target.value
+												);
+											}}
+										></textarea>
 									</td>
 									<td className="text-2xl">
-										{lap.getWorkDoneString()}
+										{lap.getAmount()}
 									</td>
 								</tr>
 							);
@@ -180,6 +200,24 @@ const Home = () => {
 					</tbody>
 				</table>
 			</div>
+			<dialog id="my_modal_1" className="modal">
+				<div className="modal-box">
+					<h3 className="font-bold text-lg">
+						Congratulations on the Lap!
+					</h3>
+					<p className="py-4">
+						Please write what you have done in the last lap.
+					</p>
+					<div className="modal-action">
+						<div className="flex flex-col w-full">
+							<textarea
+								className="textarea textarea-accent w-full rounded-xl"
+								placeholder="work completed in this lap."
+							></textarea>
+						</div>
+					</div>
+				</div>
+			</dialog>
 		</div>
 	);
 };
