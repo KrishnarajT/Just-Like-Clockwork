@@ -8,7 +8,7 @@ class WorkLap {
 		current_minutes,
 		current_seconds,
 		workDoneString,
-		amount
+		HourlyAmount
 	) {
 		this.id = uuidv4();
 		this.startTime = startTime;
@@ -17,7 +17,11 @@ class WorkLap {
 		this.current_minutes = current_minutes;
 		this.current_seconds = current_seconds;
 		this.workDoneString = workDoneString;
-		this.amount = amount;
+		// type check hourly amount, if it is not a float, convert it to a float.
+		if (typeof HourlyAmount !== "number") {
+			HourlyAmount = parseFloat(HourlyAmount);
+		}
+		this.HourlyAmount = HourlyAmount;
 	}
 
 	// Getters
@@ -25,7 +29,7 @@ class WorkLap {
 		return this.id;
 	}
 
-	getAmount() {
+	getHourlyAmount() {
 		return this.amount;
 	}
 
@@ -53,6 +57,15 @@ class WorkLap {
 		return this.workDoneString;
 	}
 
+	getAmount() {
+		const totalSeconds =
+			this.current_hours * 3600 +
+			this.current_minutes * 60 +
+			this.current_seconds;
+		const amount = this.HourlyAmount * (totalSeconds / 3600);
+		return amount.toFixed(3);
+	}
+
 	// Setters
 	setStartTime(startTime) {
 		this.startTime = startTime;
@@ -78,8 +91,8 @@ class WorkLap {
 		this.workDoneString = workDoneString;
 	}
 
-	setAmount(amount) {
-		this.amount = amount;
+	setHourlyAmount(amount) {
+		this.HourlyAmount = amount;
 	}
 }
 

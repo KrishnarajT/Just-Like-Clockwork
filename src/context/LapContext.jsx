@@ -6,10 +6,12 @@ export const LapContext = createContext();
 // Create a provider component
 const LapProvider = ({ children }) => {
 	const [laps, setLaps] = useState([]);
+	const [amount, setAmount] = useState(0.0);
 
 	// Add a lap to the laps array
 	const addLap = (lap) => {
 		console.log(lap);
+		lap.setHourlyAmount(amount);
 		// new lap reversed
 		setLaps((prevLaps) => [lap, ...prevLaps]);
 	};
@@ -43,6 +45,10 @@ const LapProvider = ({ children }) => {
 		setLaps(newLaps);
 	};
 
+	const updateAmount = (amount) => {
+		setAmount(amount);
+	};
+
 	// update a lap
 	const updateLap = (lapId, hours, minutes, seconds) => {
 		const newLaps = laps.map((lap) => {
@@ -67,6 +73,7 @@ const LapProvider = ({ children }) => {
 				getLastLap,
 				getLapFromId,
 				updateWorkDoneByID,
+				updateAmount,
 			}}
 		>
 			{children}
