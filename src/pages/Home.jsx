@@ -41,6 +41,7 @@ const Home = () => {
 	const [isPlaying, setIsPlaying] = useState(false);
 	const [started, setStarted] = useState(false);
 	const [clearTimer, setClearTimer] = useState(false);
+	const [clearLapTimer, setClearLapTimer] = useState(false);
 	const [lap, setLap] = useState();
 
 	console.log(laps, lap);
@@ -57,7 +58,7 @@ const Home = () => {
 						<Timer
 							lap={getLapFromId(lap)}
 							isPlaying={isPlaying}
-							clearTimer={clearTimer}
+							clearTimer={clearLapTimer}
 							setClearTimer={setClearTimer}
 							UpdateCurrentWorkLapTime={UpdateCurrentWorkLapTime}
 						/>
@@ -98,11 +99,16 @@ const Home = () => {
 
 			<div className="w-full justify-center flex gap-4">
 				<button
-					disabled={!started}
+					disabled={
+						!started ||
+						(getLapFromId(lap).getCurrentHours() === 0 &&
+							getLapFromId(lap).getCurrentMinutes() === 0)
+					}
 					onClick={() => {
 						setIsPlaying(false);
 						const new_lap_id = addNewLap();
 						setLap(new_lap_id);
+						setClearLapTimer(true);
 					}}
 				>
 					<LapIcon className="w-24 h-24 text-secondary transition-all duration-300 hover:text-primary hover:scale-90" />

@@ -2,11 +2,15 @@ import { ClockIcon } from "./ui/ClockIcon";
 import { Link } from "react-router-dom";
 import { useState } from "react";
 import { LapContext } from "../context/LapContext";
-import React from "react";
+import React, { useEffect } from "react";
 
 export default function Navbar() {
-	const [amount, setAmount] = useState(0.0);
+	const [amount, setAmount] = useState(250);
 	const { updateAmount } = React.useContext(LapContext);
+
+	useEffect(() => {
+		updateAmount(amount);
+	}, [amount]);
 
 	const handleAmountChange = (e) => {
 		setAmount(e.target.value);
@@ -28,13 +32,20 @@ export default function Navbar() {
 			<div className="flex-none">
 				<ul className="menu menu-horizontal px-1">
 					<li className="text-xl">
-						<input
-							type="text"
-							placeholder="Enter Hourly Amount"
-							value={amount}
-							onChange={handleAmountChange}
-							className="input input-bordered input-success w-full max-w-xs"
-						/>
+						<div className="m-0 p-0">
+							<label className="label">
+								<span className="label-text text-xl">
+									Hourly Amount
+								</span>
+							</label>
+							<input
+								type="text"
+								placeholder="Enter Hourly Amount"
+								value={amount}
+								onChange={handleAmountChange}
+								className="input input-bordered input-success w-48 max-w-xs"
+							/>
+						</div>
 					</li>
 					<li>
 						<details>
