@@ -62,6 +62,16 @@ const LapProvider = ({ children }) => {
 		setLaps(newLaps);
 	};
 
+	// Function to calculate the total amount sum of all laps
+	const getTotalAmountSum = () => {
+		let totalAmount = 0.0;
+		laps.forEach((lap) => {
+			totalAmount += lap.getAmount();
+		});
+		return totalAmount;
+	};
+
+	
 	// Provide the context value to the children components
 	return (
 		<LapContext.Provider
@@ -74,6 +84,7 @@ const LapProvider = ({ children }) => {
 				getLapFromId,
 				updateWorkDoneByID,
 				updateAmount,
+				getTotalAmountSum,
 			}}
 		>
 			{children}

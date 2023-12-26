@@ -63,6 +63,9 @@ export default function Navbar() {
 								<li>
 									<a>PDF</a>
 								</li>
+								<li>
+									<a>Browser LocalStorage</a>
+								</li>
 							</ul>
 						</details>
 					</li>
