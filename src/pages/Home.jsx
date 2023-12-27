@@ -75,7 +75,7 @@ const Home = () => {
 	return (
 		<div>
 			{laps.length > 0 ? (
-				<div className="flex justify-center items-center h-48 text-primary gap-16 m-10">
+				<div className="flex justify-center items-center h-48 text-accent gap-16 m-10">
 					<div className="outline p-8 rounded-xl pb-2 outline-secondary">
 						<Timer
 							lap={getLapFromId(lap) ? getLapFromId(lap) : getFirstLap()}
@@ -84,7 +84,7 @@ const Home = () => {
 							setClearTimer={setClearLapTimer}
 							UpdateCurrentWorkLapTime={UpdateCurrentWorkLapTime}
 						/>
-						<div className="flex justify-center items-center text-center text-2xl italic">
+						<div className="flex justify-center items-center text-center text-2xl italic text-secondary">
 							Lap Time
 						</div>
 					</div>
@@ -95,22 +95,22 @@ const Home = () => {
 							setClearTimer={setClearTimer}
 							UpdateCurrentWorkLapTime={UpdateCurrentWorkLapTime}
 						/>
-						<div className="flex justify-center items-center text-center text-2xl italic">
+						<div className="flex justify-center items-center text-center text-2xl italic text-secondary">
 							Total Time
 						</div>
 					</div>
 				</div>
 			) : (
-				<div className="flex justify-center items-center h-48 text-primary gap-16 m-10">
+				<div className="flex justify-center items-center h-48 text-accent gap-16 m-10">
 					<div className="outline p-8 rounded-xl pb-2 outline-secondary">
 						<div className="text-9xl font-bold">00:00:00</div>
-						<div className="flex justify-center items-center text-center text-2xl italic">
+						<div className="flex justify-center items-center text-center text-2xl italic text-secondary">
 							Lap Time
 						</div>
 					</div>
 					<div className="outline p-8 rounded-xl pb-2 outline-secondary">
 						<div className="text-9xl font-bold text-secondary">00:00:00</div>
-						<div className="flex justify-center items-center text-center text-2xl italic">
+						<div className="flex justify-center items-center text-center text-2xl italic text-secondary">
 							Total Time
 						</div>
 					</div>
@@ -235,7 +235,7 @@ const Home = () => {
 					<div className="stat">
 						<div className="stat-figure text-secondary"></div>
 						<div className="stat-title text-xl">Tasks Completed</div>
-						<div className="stat-value text-primary text-6xl">
+						<div className="stat-value text-accent text-6xl">
 							{laps.length}
 						</div>
 						<div className="stat-desc text-xl">The Total number of laps.</div>
@@ -246,7 +246,7 @@ const Home = () => {
 						<div className="stat-title text-xl">
 							Total Minutes Spent Working
 						</div>
-						<div className="stat-value text-primary text-6xl">
+						<div className="stat-value text-accent text-6xl">
 							{getTotalTimeSpent()}
 						</div>
 						<div className="stat-desc text-xl">Sum of time on all laps.</div>
@@ -255,7 +255,7 @@ const Home = () => {
 					<div className="stat">
 						<div className="stat-figure text-secondary"></div>
 						<div className="stat-title text-xl">Total Amount Earned</div>
-						<div className="stat-value text-primary text-6xl">
+						<div className="stat-value text-accent text-6xl">
 							{"₹ " + getTotalAmountSum()}
 						</div>
 						<div className="stat-desc text-xl">Sum of amount on all laps.</div>
@@ -265,7 +265,7 @@ const Home = () => {
 
 			{/* footer */}
 			<footer className="footer footer-center p-10 bg-base-200 text-base-content rounded">
-				<label className="label text-xl text-primary">
+				<label className="label text-xl text-accent">
 					Developed by Krishnaraj T, for Keeping track of work done. <br></br>
 					Feel free to contribute, or use it for your own use :) <br />
 					<br />

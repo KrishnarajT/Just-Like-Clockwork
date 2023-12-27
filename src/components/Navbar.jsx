@@ -73,20 +73,20 @@ export default function Navbar() {
 					<li className="text-xl">
 						<div className="m-0 p-0">
 							<label className="label">
-								<span className="label-text text-xl">Hourly Amount</span>
+								<span className="label-text text-xl mx-2">Hourly Amount</span>
 							</label>
 							<input
 								type="text"
 								placeholder="Enter Hourly Amount"
 								value={amount}
 								onChange={handleAmountChange}
-								className="input input-bordered input-success w-48 max-w-xs"
+								className="input input-bordered input-success w-48 max-w-xs mx-2"
 							/>
 						</div>
 					</li>
 					<li>
 						<details>
-							<summary className="text-xl">Import</summary>
+							<summary className="text-xl mx-2">Import</summary>
 							<ul className="p-2 bg-base-100 rounded-t-none">
 								<li>
 									<a
@@ -114,7 +114,7 @@ export default function Navbar() {
 					</li>
 					<li>
 						<details>
-							<summary className="text-xl">Export</summary>
+							<summary className="text-xl mx-2">Export</summary>
 							<ul className="p-2 bg-base-100 rounded-t-none">
 								<li>
 									<a onClick={handleExportCSV}>CSV</a>
