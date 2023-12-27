@@ -1,9 +1,9 @@
-import WorkLap from '../../classes/WorkLapClass';
+import WorkLap from "../../classes/WorkLapClass";
 
 function uploadJSON(callback) {
   // Create an input element
-  let input = document.createElement('input');
-  input.type = 'file';
+  let input = document.createElement("input");
+  input.type = "file";
 
   // Set up the change event to read the file when selected
   input.onchange = (e) => {
@@ -18,7 +18,18 @@ function uploadJSON(callback) {
       let data = JSON.parse(e.target.result);
 
       // Convert the data to WorkLap objects
-      let laps = data.map((lap) => new WorkLap(lap.startTime, lap.endTime, lap.current_hours, lap.current_minutes, lap.current_seconds, lap.workDoneString, lap.HourlyAmount));
+      let laps = data.map(
+        (lap) =>
+          new WorkLap(
+            lap.startTime,
+            lap.endTime,
+            lap.current_hours,
+            lap.current_minutes,
+            lap.current_seconds,
+            lap.workDoneString,
+            lap.HourlyAmount,
+          ),
+      );
 
       // Call the callback function with the laps array
       callback(laps);
