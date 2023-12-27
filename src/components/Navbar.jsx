@@ -5,7 +5,7 @@ import { LapContext } from "../context/LapContext";
 import React, { useEffect } from "react";
 
 import uploadCSV from "../components/import/from_csv";
-import importJSON from "../components/import/from_json";
+import uploadJSON from "../components/import/from_json";
 import importBrowser from "./import/from_local";
 import exportCSV from "../components/export/to_csv";
 import exportJSON from "../components/export/to_json";
@@ -31,8 +31,9 @@ export default function Navbar() {
 		setLaps(laps);
 	};
 
-	const handleImportJSON = async () => {
-		await importJSON();
+	const handleImportJSON = (laps) => {
+		console.log(laps);
+		setLaps(laps);
 	};
 
 	const handleImportBrowser = async () => {
@@ -97,7 +98,13 @@ export default function Navbar() {
 									</a>
 								</li>
 								<li>
-									<a onClick={handleImportJSON}>JSON</a>
+									<a
+										onClick={() => {
+											uploadJSON(handleImportJSON);
+										}}
+									>
+										JSON
+									</a>
 								</li>
 								<li>
 									<a onClick={handleImportBrowser}>Browser</a>
