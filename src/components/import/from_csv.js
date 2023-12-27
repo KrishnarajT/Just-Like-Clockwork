@@ -1,5 +1,5 @@
 import Papa from 'papaparse';
-import WorkLap from './WorkLapClass';
+import WorkLap from '../../classes/WorkLapClass';
 
 function uploadCSV(callback) {
   // Create an input element

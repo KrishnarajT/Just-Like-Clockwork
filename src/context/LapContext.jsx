@@ -1,5 +1,6 @@
 import { createContext, useState } from "react";
 import getFromIndexedDB from "../components/import/from_indexdb";
+import saveToIndexedDB from "../components/export/to_indexdb";
 import { useEffect } from "react";
 
 // Create the context
@@ -15,12 +16,18 @@ const LapProvider = ({ children }) => {
 		getFromIndexedDB(setLaps);
 	}, []);
 
+	useEffect(() => {
+		// Save laps to IndexedDB whenever they change
+		saveToIndexedDB(laps);
+	}, [laps]);
+
 	// Add a lap to the laps array
 	const addLap = (lap) => {
 		console.log(lap);
 		lap.setHourlyAmount(amount);
 		// new lap reversed
 		setLaps((prevLaps) => [lap, ...prevLaps]);
+
 	};
 
 	// Remove all laps

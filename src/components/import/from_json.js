@@ -1,4 +1,4 @@
-import WorkLap from './WorkLapClass';
+import WorkLap from '../../classes/WorkLapClass';
 
 function uploadJSON(callback) {
   // Create an input element

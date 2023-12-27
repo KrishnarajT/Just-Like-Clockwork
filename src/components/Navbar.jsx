@@ -4,6 +4,14 @@ import { useState } from "react";
 import { LapContext } from "../context/LapContext";
 import React, { useEffect } from "react";
 
+import importCSV from "../components/import/from_csv";
+import importJSON from "../components/import/from_json";
+import importBrowser from "../components/import/from_indexdb";
+import exportCSV from "../components/export/to_csv";
+import exportJSON from "../components/export/to_json";
+import exportPDF from "../components/export/to_pdf";
+import exportBrowser from "../components/export/to_indexdb";
+
 export default function Navbar() {
 	const [amount, setAmount] = useState(250);
 	const { updateAmount } = React.useContext(LapContext);
@@ -49,6 +57,22 @@ export default function Navbar() {
 					</li>
 					<li>
 						<details>
+							<summary className="text-xl">Import</summary>
+							<ul className="p-2 bg-base-100 rounded-t-none">
+								<li>
+									<a>CSV</a>
+								</li>
+								<li>
+									<a>JSON</a>
+								</li>
+								<li>
+									<a>Browser</a>
+								</li>
+							</ul>
+						</details>
+					</li>
+					<li>
+						<details>
 							<summary className="text-xl">Export</summary>
 							<ul className="p-2 bg-base-100 rounded-t-none">
 								<li>
@@ -58,13 +82,10 @@ export default function Navbar() {
 									<a>JSON</a>
 								</li>
 								<li>
-									<a>Text</a>
-								</li>
-								<li>
 									<a>PDF</a>
 								</li>
 								<li>
-									<a>Browser LocalStorage</a>
+									<a>Browser</a>
 								</li>
 							</ul>
 						</details>
