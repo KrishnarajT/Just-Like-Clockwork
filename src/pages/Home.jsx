@@ -36,6 +36,7 @@ const Home = () => {
 		updateWorkDoneByID,
 		getTotalAmountSum,
 		getTotalTimeSpent,
+		updateEndTime,
 	} = useContext(LapContext);
 
 	const UpdateCurrentWorkLapTime = (lapId, hours, minutes, seconds) => {
@@ -70,7 +71,7 @@ const Home = () => {
 							lap={getLapFromId(lap)}
 							isPlaying={isPlaying}
 							clearTimer={clearLapTimer}
-							setClearTimer={setClearTimer}
+							setClearTimer={setClearLapTimer}
 							UpdateCurrentWorkLapTime={UpdateCurrentWorkLapTime}
 						/>
 						<div className="flex justify-center items-center text-center text-2xl italic">
@@ -116,6 +117,7 @@ const Home = () => {
 							getLapFromId(lap).getCurrentMinutes() === 0)
 					}
 					onClick={() => {
+						updateEndTime(lap, new Date().toLocaleString());
 						setIsPlaying(false);
 						const new_lap_id = addNewLap();
 						setLap(new_lap_id);
@@ -178,8 +180,9 @@ const Home = () => {
 						<tr className="text-2xl">
 							<th className="w-4">ID</th>
 							<th className="w-48">Start Time</th>
-							<th className="w-24">Elapsed Time</th>
-							<th className="w-1/2 break-words">Work Done</th>
+							<th className="w-48">End Time</th>
+							<th className="w-12">Elapsed Time</th>
+							<th className="w-1/3 break-words">Work Done</th>
 							<th className="w-12">Amount</th>
 						</tr>
 					</thead>
@@ -195,9 +198,14 @@ const Home = () => {
 										{lap.getStartTime()}
 									</td>
 									<td className="text-2xl">
-										{lap.getCurrentHours()} Hours :{" "}
-										{lap.getCurrentMinutes()} Minutes :{" "}
-										{lap.getCurrentSeconds()} Seconds
+										{lap.getEndTime() === 0
+											? "Not finished yet"
+											: lap.getEndTime()}
+									</td>
+									<td className="text-2xl">
+										{lap.getCurrentHours()}h:{" "}
+										{lap.getCurrentMinutes()}m:{" "}
+										{lap.getCurrentSeconds()}s
 									</td>
 									<td className="text-2xl break-words">
 										<textarea

@@ -1,7 +1,6 @@
-import { createContext, useState } from "react";
+import { createContext, useState, useEffect } from "react";
 import getFromIndexedDB from "../components/import/from_indexdb";
 import saveToIndexedDB from "../components/export/to_indexdb";
-import { useEffect } from "react";
 
 // Create the context
 export const LapContext = createContext();
@@ -16,8 +15,8 @@ const LapProvider = ({ children }) => {
 		getFromIndexedDB(setLaps);
 	}, []);
 
+	// Save laps to IndexedDB whenever they change
 	useEffect(() => {
-		// Save laps to IndexedDB whenever they change
 		saveToIndexedDB(laps);
 	}, [laps]);
 
@@ -27,7 +26,6 @@ const LapProvider = ({ children }) => {
 		lap.setHourlyAmount(amount);
 		// new lap reversed
 		setLaps((prevLaps) => [lap, ...prevLaps]);
-
 	};
 
 	// Remove all laps
@@ -35,20 +33,18 @@ const LapProvider = ({ children }) => {
 		setLaps([]);
 	};
 
-	// get last lap
+	// Get the ID of the last lap
 	const getLastLap = () => {
 		console.log("the laps look like this", laps);
-		// return the id of the last lap
 		return laps[laps.length - 1].id;
 	};
 
-	// get lap from id
+	// Get lap from ID
 	const getLapFromId = (id) => {
-		return laps.filter((lap) => {
-			return lap.id === id;
-		})[0];
+		return laps.filter((lap) => lap.id === id)[0];
 	};
 
+	// Update work done by ID
 	const updateWorkDoneByID = (id, workDone) => {
 		const newLaps = laps.map((lap) => {
 			if (lap.id === id) {
@@ -59,11 +55,12 @@ const LapProvider = ({ children }) => {
 		setLaps(newLaps);
 	};
 
+	// Update the amount
 	const updateAmount = (amount) => {
 		setAmount(amount);
 	};
 
-	// update a lap
+	// Update a lap
 	const updateLap = (lapId, hours, minutes, seconds) => {
 		const newLaps = laps.map((lap) => {
 			if (lap.id === lapId) {
@@ -76,7 +73,7 @@ const LapProvider = ({ children }) => {
 		setLaps(newLaps);
 	};
 
-	// Function to calculate the total amount sum of all laps
+	// Calculate the total amount sum of all laps
 	const getTotalAmountSum = () => {
 		let totalAmount = 0.0;
 		laps.forEach((lap) => {
@@ -87,15 +84,26 @@ const LapProvider = ({ children }) => {
 		return totalAmount;
 	};
 
-	// function to get the total time spent in minutes
+	// Calculate the total time spent in minutes
 	const getTotalTimeSpent = () => {
 		let totalMinutes = 0;
 		laps.forEach((lap) => {
 			totalMinutes += +lap.getTotalTimeInMinutes();
 		});
-		// round to 2 decimal places
+		// Round to 2 decimal places
 		totalMinutes = Math.round(totalMinutes * 100) / 100;
 		return totalMinutes;
+	};
+
+	// function to update the end time for a lap
+	const updateEndTime = (lapId, endTime) => {
+		const newLaps = laps.map((lap) => {
+			if (lap.id === lapId) {
+				lap.setEndTime(endTime);
+			}
+			return lap;
+		});
+		setLaps(newLaps);
 	};
 
 	// Provide the context value to the children components
@@ -110,6 +118,7 @@ const LapProvider = ({ children }) => {
 				getLapFromId,
 				updateWorkDoneByID,
 				updateAmount,
+				updateEndTime,
 				getTotalAmountSum,
 				getTotalTimeSpent,
 			}}

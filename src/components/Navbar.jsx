@@ -14,7 +14,7 @@ import exportBrowser from "../components/export/to_indexdb";
 
 export default function Navbar() {
 	const [amount, setAmount] = useState(250);
-	const { updateAmount } = React.useContext(LapContext);
+	const { laps, updateAmount } = React.useContext(LapContext);
 
 	useEffect(() => {
 		updateAmount(amount);
@@ -23,6 +23,34 @@ export default function Navbar() {
 	const handleAmountChange = (e) => {
 		setAmount(e.target.value);
 		updateAmount(e.target.value);
+	};
+
+	const handleImportCSV = async () => {
+		await importCSV();
+	};
+
+	const handleImportJSON = async () => {
+		await importJSON();
+	};
+
+	const handleImportBrowser = async () => {
+		await importBrowser();
+	};
+
+	const handleExportCSV = async () => {
+		exportCSV(laps);
+	};
+
+	const handleExportJSON = async () => {
+		await exportJSON();
+	};
+
+	const handleExportPDF = async () => {
+		await exportPDF();
+	};
+
+	const handleExportBrowser = async () => {
+		await exportBrowser();
 	};
 
 	return (
@@ -60,13 +88,13 @@ export default function Navbar() {
 							<summary className="text-xl">Import</summary>
 							<ul className="p-2 bg-base-100 rounded-t-none">
 								<li>
-									<a>CSV</a>
+									<a onClick={handleImportCSV}>CSV</a>
 								</li>
 								<li>
-									<a>JSON</a>
+									<a onClick={handleImportJSON}>JSON</a>
 								</li>
 								<li>
-									<a>Browser</a>
+									<a onClick={handleImportBrowser}>Browser</a>
 								</li>
 							</ul>
 						</details>
@@ -76,16 +104,16 @@ export default function Navbar() {
 							<summary className="text-xl">Export</summary>
 							<ul className="p-2 bg-base-100 rounded-t-none">
 								<li>
-									<a>CSV</a>
+									<a onClick={handleExportCSV}>CSV</a>
 								</li>
 								<li>
-									<a>JSON</a>
+									<a onClick={handleExportJSON}>JSON</a>
 								</li>
 								<li>
-									<a>PDF</a>
+									<a onClick={handleExportPDF}>PDF</a>
 								</li>
 								<li>
-									<a>Browser</a>
+									<a onClick={handleExportBrowser}>Browser</a>
 								</li>
 							</ul>
 						</details>
