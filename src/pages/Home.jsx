@@ -54,7 +54,9 @@ const Home = () => {
 	const [started, setStarted] = useState(false);
 	const [clearTimer, setClearTimer] = useState(false);
 	const [clearLapTimer, setClearLapTimer] = useState(false);
-	const [lap, setLap] = useState();
+	const [lap, setLap] = useState(
+		laps.length > 0 ? laps[0].getId() : ""
+	);
 
 	console.log(laps, lap);
 	if (laps.length > 0) {
@@ -155,6 +157,9 @@ const Home = () => {
 									console.log(laps);
 									setStarted(true);
 									setIsPlaying(true);
+								} else {
+									setStarted(true);
+									// setIsPlaying(true);
 								}
 							}}
 						/>

@@ -6,15 +6,16 @@ import React, { useEffect } from "react";
 
 import importCSV from "../components/import/from_csv";
 import importJSON from "../components/import/from_json";
-import importBrowser from "../components/import/from_indexdb";
+import importBrowser from "./import/from_local";
 import exportCSV from "../components/export/to_csv";
 import exportJSON from "../components/export/to_json";
 import exportPDF from "../components/export/to_pdf";
-import exportBrowser from "../components/export/to_indexdb";
+import exportBrowser from "./export/to_local";
 
 export default function Navbar() {
 	const [amount, setAmount] = useState(250);
-	const { laps, updateAmount } = React.useContext(LapContext);
+	const { laps, updateAmount, getTotalAmountSum, getTotalTimeSpent } =
+		React.useContext(LapContext);
 
 	useEffect(() => {
 		updateAmount(amount);
@@ -42,15 +43,15 @@ export default function Navbar() {
 	};
 
 	const handleExportJSON = async () => {
-		await exportJSON();
+		exportJSON(laps);
 	};
 
 	const handleExportPDF = async () => {
-		await exportPDF();
+		exportPDF(laps, getTotalAmountSum(), getTotalTimeSpent(), laps.length);
 	};
 
 	const handleExportBrowser = async () => {
-		await exportBrowser();
+		exportBrowser(laps);
 	};
 
 	return (

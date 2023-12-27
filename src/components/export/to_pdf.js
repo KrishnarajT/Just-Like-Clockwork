@@ -18,10 +18,11 @@ function downloadPDF(laps, total_amount, total_hours, total_laps) {
 	];
 
 	// Convert each lap to a PDF table row
-	const rows = laps.map((lap) => [
-		lap.id,
+	const rows = laps.map((lap, index) => [
+		// lap.id,
+		index.toString(),
 		lap.startTime,
-		lap.endTime,
+		lap.endTime === 0 ? "Not Yet Finished" : lap.endTime,
 		lap.current_hours,
 		lap.current_minutes,
 		lap.current_seconds,
@@ -34,7 +35,7 @@ function downloadPDF(laps, total_amount, total_hours, total_laps) {
 		head: [columns],
 		body: rows,
 		foot: [
-			["Total", "", "", total_hours, "", "", total_laps, total_amount],
+			[total_laps, "Total", "", total_hours, "", "", "", total_amount],
 		],
 		footStyles: { fillColor: [41, 128, 185], textColor: 255 },
 	});

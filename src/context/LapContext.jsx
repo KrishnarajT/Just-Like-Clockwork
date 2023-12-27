@@ -1,23 +1,30 @@
 import { createContext, useState, useEffect } from "react";
-import getFromIndexedDB from "../components/import/from_indexdb";
-import saveToIndexedDB from "../components/export/to_indexdb";
+import getFromLocalStorage from "../components/import/from_local";
+import saveToLocalStorage from "../components/export/to_local";
 
 // Create the context
 export const LapContext = createContext();
 
 // Create a provider component
 const LapProvider = ({ children }) => {
-	const [laps, setLaps] = useState([]);
+	let Laps = getFromLocalStorage() || [];
+	const [laps, setLaps] = useState(Laps);
+
+	function handleLapLocalUpdate(laps) {
+		setLaps(laps);
+	}
+
 	const [amount, setAmount] = useState(0.0);
 
 	// Load laps from IndexedDB when the component mounts
 	useEffect(() => {
-		getFromIndexedDB(setLaps);
+		console.log("LapProvider mounted");
+		getFromLocalStorage(handleLapLocalUpdate);
 	}, []);
 
 	// Save laps to IndexedDB whenever they change
 	useEffect(() => {
-		saveToIndexedDB(laps);
+		saveToLocalStorage(laps);
 	}, [laps]);
 
 	// Add a lap to the laps array
