@@ -4,6 +4,12 @@ function getFromLocalStorage() {
 	// Get the JSON string from localStorage
 	let lapsJSON = localStorage.getItem("laps");
 
+	// Check if localStorage is empty
+	if (!lapsJSON) {
+		console.log("No laps found in local storage");
+		return [];
+	}
+
 	// Convert the JSON string back to an array
 	let lapsPlain = JSON.parse(lapsJSON);
 
@@ -17,8 +23,8 @@ function getFromLocalStorage() {
 				lap.current_minutes,
 				lap.current_seconds,
 				lap.workDoneString,
-				lap.HourlyAmount,
-			),
+				lap.HourlyAmount
+			)
 	);
 
 	console.log("Laps from local storage: ", laps);

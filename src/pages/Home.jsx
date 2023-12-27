@@ -84,6 +84,7 @@ const Home = () => {
 		if (laps.length > 0) {
 			setLap(laps[0].getId());
 		}
+		// localStorage.clear();
 	}, [laps, lap]);
 
 	console.log(laps, lap);
