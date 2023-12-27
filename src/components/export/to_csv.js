@@ -1,0 +1,20 @@
+import { saveAs } from 'file-saver';
+
+function downloadCSV(laps) {
+  // Define the CSV header
+  let csvContent = 'data:text/csv;charset=utf-8,';
+  csvContent += 'ID,Start Time,End Time,Hours,Minutes,Seconds,Work Done,Hourly Amount\n';
+
+  // Convert each lap to a CSV row and add it to the CSV content
+  laps.forEach((lap) => {
+    csvContent += `${lap.id},${lap.startTime},${lap.endTime},${lap.current_hours},${lap.current_minutes},${lap.current_seconds},${lap.workDoneString},${lap.HourlyAmount}\n`;
+  });
+
+  // Create a Blob from the CSV content
+  let blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8;' });
+
+  // Trigger the download
+  saveAs(blob, 'laps.csv');
+}
+
+export default downloadCSV;
