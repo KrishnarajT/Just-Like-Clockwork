@@ -1,5 +1,7 @@
 // importing basics
 import { useState, useContext, useEffect } from "react";
+import { ThemeContext } from "../context/ThemeContext";
+import React from "react";
 
 // importing classes
 import WorkLap from "../classes/WorkLapClass";
@@ -27,6 +29,26 @@ import {
 	IconPhoneCall,
 } from "@tabler/icons-react";
 const Home = () => {
+	const { theme } = React.useContext(ThemeContext);
+	useEffect(() => {
+		if (theme === "business") {
+			const light_button = document.getElementById("business_button");
+			light_button.click();
+		} else if (theme === "dracula") {
+			const dark_button = document.getElementById("dracula_button");
+			dark_button.click();
+		} else if (theme === "forest") {
+			const dark_button = document.getElementById("forest_button");
+			dark_button.click();
+		} else if (theme === "corporate") {
+			const dark_button = document.getElementById("corporate_button");
+			dark_button.click();
+		} else if (theme === "wireframe") {
+			const dark_button = document.getElementById("wireframe_button");
+			dark_button.click();
+		}
+	});
+
 	const {
 		laps,
 		addLap,
@@ -75,7 +97,7 @@ const Home = () => {
 	return (
 		<div>
 			{laps.length > 0 ? (
-				<div className="flex justify-center items-center h-48 text-accent gap-16 m-10">
+				<div className="flex justify-center items-center h-48  gap-16 m-10">
 					<div className="outline p-8 rounded-xl pb-2 outline-secondary">
 						<Timer
 							lap={getLapFromId(lap) ? getLapFromId(lap) : getFirstLap()}
@@ -101,7 +123,7 @@ const Home = () => {
 					</div>
 				</div>
 			) : (
-				<div className="flex justify-center items-center h-48 text-accent gap-16 m-10">
+				<div className="flex justify-center items-center h-48  gap-16 m-10">
 					<div className="outline p-8 rounded-xl pb-2 outline-secondary">
 						<div className="text-9xl font-bold">00:00:00</div>
 						<div className="flex justify-center items-center text-center text-2xl italic text-secondary">
@@ -230,14 +252,12 @@ const Home = () => {
 			</div>
 
 			<div className="w-full flex flex-col justify-center items-center my-10 outline p-6">
-				<div className="font-bold text-accent text-6xl">Stats</div>
+				<div className="font-bold  text-6xl">Stats</div>
 				<div className="stats shadow">
 					<div className="stat">
 						<div className="stat-figure text-secondary"></div>
 						<div className="stat-title text-xl">Tasks Completed</div>
-						<div className="stat-value text-accent text-6xl">
-							{laps.length}
-						</div>
+						<div className="stat-value text-accent text-6xl">{laps.length}</div>
 						<div className="stat-desc text-xl">The Total number of laps.</div>
 					</div>
 
@@ -265,7 +285,7 @@ const Home = () => {
 
 			{/* footer */}
 			<footer className="footer footer-center p-10 bg-base-200 text-base-content rounded">
-				<label className="label text-xl text-accent">
+				<label className="label text-xl ">
 					Developed by Krishnaraj T, for Keeping track of work done. <br></br>
 					Feel free to contribute, or use it for your own use :) <br />
 					<br />
@@ -311,7 +331,7 @@ const Home = () => {
 						onClick={() => {
 							window.open("https://www.github.com/KrishnarajT", "_blank");
 							navigator.clipboard.writeText(
-								"https://www.github.com/KrishnarajT",
+								"https://www.github.com/KrishnarajT"
 							);
 							const toast = document.querySelector(".toast");
 							toast.classList.remove("hidden");
@@ -336,7 +356,7 @@ const Home = () => {
 						onClick={() => {
 							window.open(
 								"https://www.linkedin.com/in/krishnaraj-thadesar-2541451b9/",
-								"_blank",
+								"_blank"
 							);
 						}}
 					>
@@ -355,7 +375,7 @@ const Home = () => {
 						onClick={() => {
 							window.open(
 								"https://discordapp.com/users/Krishnaraj#2271",
-								"_blank",
+								"_blank"
 							);
 						}}
 					>
@@ -366,7 +386,7 @@ const Home = () => {
 						onClick={() => {
 							window.open(
 								"https://stackoverflow.com/users/14205274/krishnaraj-pt",
-								"_blank",
+								"_blank"
 							);
 						}}
 					>

@@ -11,8 +11,34 @@ import exportCSV from "../components/export/to_csv";
 import exportJSON from "../components/export/to_json";
 import exportPDF from "../components/export/to_pdf";
 import exportBrowser from "./export/to_local";
+import { themeChange } from "theme-change";
+import { ThemeContext } from "../context/ThemeContext";
 
 export default function Navbar() {
+	const { theme, setTheme } = React.useContext(ThemeContext);
+	useEffect(() => {
+		themeChange(false);
+	}, []);
+
+	useEffect(() => {
+		if (theme === "business") {
+			const light_button = document.getElementById("business_button");
+			light_button.click();
+		} else if (theme === "dracula") {
+			const dark_button = document.getElementById("dracula_button");
+			dark_button.click();
+		} else if (theme === "forest") {
+			const dark_button = document.getElementById("forest_button");
+			dark_button.click();
+		} else if (theme === "corporate") {
+			const dark_button = document.getElementById("corporate_button");
+			dark_button.click();
+		} else if (theme === "wireframe") {
+			const dark_button = document.getElementById("wireframe_button");
+			dark_button.click();
+		}
+	});
+
 	const [amount, setAmount] = useState(250);
 	const { laps, updateAmount, getTotalAmountSum, getTotalTimeSpent, setLaps } =
 		React.useContext(LapContext);
@@ -60,7 +86,7 @@ export default function Navbar() {
 		<div className="navbar bg-neutral">
 			<div className="flex-1">
 				<div className="flex">
-					<ClockIcon className="w-14 h-14" />
+					<ClockIcon className="w-14 h-14 text-neutral-content" />
 				</div>
 				<Link to="/">
 					<a className="btn btn-ghost text-2xl text-neutral-content">
@@ -73,7 +99,9 @@ export default function Navbar() {
 					<li className="text-xl">
 						<div className="m-0 p-0">
 							<label className="label">
-								<span className="label-text text-xl mx-2">Hourly Amount</span>
+								<span className="label-text text-xl mx-2  text-neutral-content">
+									Hourly Amount
+								</span>
 							</label>
 							<input
 								type="text"
@@ -86,7 +114,9 @@ export default function Navbar() {
 					</li>
 					<li>
 						<details>
-							<summary className="text-xl mx-2">Import</summary>
+							<summary className="text-xl mx-2  text-neutral-content">
+								Import
+							</summary>
 							<ul className="p-2 bg-base-100 rounded-t-none">
 								<li>
 									<a
@@ -114,7 +144,9 @@ export default function Navbar() {
 					</li>
 					<li>
 						<details>
-							<summary className="text-xl mx-2">Export</summary>
+							<summary className="text-xl mx-2  text-neutral-content">
+								Export
+							</summary>
 							<ul className="p-2 bg-base-100 rounded-t-none">
 								<li>
 									<a onClick={handleExportCSV}>CSV</a>
@@ -127,6 +159,30 @@ export default function Navbar() {
 								</li>
 								<li>
 									<a onClick={handleExportBrowser}>Browser</a>
+								</li>
+							</ul>
+						</details>
+					</li>
+					<li>
+						<details>
+							<summary className="text-xl mx-2  text-neutral-content">
+								Theme
+							</summary>
+							<ul className="p-2 bg-base-100 rounded-t-none">
+								<li>
+									<a onClick={() => setTheme("forest")}>Forest</a>
+								</li>
+								<li>
+									<a onClick={() => setTheme("dracula")}>Dracula</a>
+								</li>
+								<li>
+									<a onClick={() => setTheme("business")}>Business</a>
+								</li>
+								<li>
+									<a onClick={() => setTheme("corporate")}>Corporate</a>
+								</li>
+								<li>
+									<a onClick={() => setTheme("wireframe")}>Wireframe</a>
 								</li>
 							</ul>
 						</details>

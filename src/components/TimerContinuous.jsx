@@ -36,7 +36,7 @@ const TimerContinuous = ({ isPlaying, clearTimer, setClearTimer }) => {
 	}, [isPlaying, clearTimer, setClearTimer]);
 
 	return (
-		<div className="text-9xl font-bold text-secondary">
+		<div className="text-9xl font-bold text-accent">
 			{time.hours.toString().padStart(2, "0")}:
 			{time.minutes.toString().padStart(2, "0")}:
 			{time.seconds.toString().padStart(2, "0")}
