@@ -1,4 +1,6 @@
 import { createContext, useState } from "react";
+import getFromIndexedDB from "../components/import/from_indexdb";
+import { useEffect } from "react";
 
 // Create the context
 export const LapContext = createContext();
@@ -7,6 +9,11 @@ export const LapContext = createContext();
 const LapProvider = ({ children }) => {
 	const [laps, setLaps] = useState([]);
 	const [amount, setAmount] = useState(0.0);
+
+	// Load laps from IndexedDB when the component mounts
+	useEffect(() => {
+		getFromIndexedDB(setLaps);
+	}, []);
 
 	// Add a lap to the laps array
 	const addLap = (lap) => {
