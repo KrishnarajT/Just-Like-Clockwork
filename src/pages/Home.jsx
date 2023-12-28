@@ -80,14 +80,14 @@ const Home = () => {
 	const [lap, setLap] = useState(laps.length > 0 ? laps[0].getId() : "");
 
 	useEffect(() => {
-		console.log("laps have changed");
+		// console.log("laps have changed");
 		if (laps.length > 0) {
 			setLap(laps[0].getId());
 		}
 		// localStorage.clear();
 	}, [laps, lap]);
 
-	console.log(laps, lap);
+	// console.log(laps, lap);
 	// if (laps.length > 0) {
 	// 	if (laps.length > 0) {
 	// 		setLap(laps[0].getId());

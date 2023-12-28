@@ -23,11 +23,12 @@ function getFromLocalStorage() {
 				lap.current_minutes,
 				lap.current_seconds,
 				lap.workDoneString,
-				lap.HourlyAmount
+				lap.HourlyAmount,
+				lap.id
 			)
 	);
 
-	console.log("Laps from local storage: ", laps);
+	// console.log("Laps from local storage: ", laps);
 
 	return laps;
 }

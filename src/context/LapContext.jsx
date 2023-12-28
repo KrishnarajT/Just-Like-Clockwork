@@ -98,6 +98,17 @@ const LapProvider = ({ children }) => {
 		return totalMinutes;
 	};
 
+	// Calculate the total time spent in seconds
+	const getTotalTimeSpentSeconds = () => {
+		let totalSeconds = 0;
+		laps.forEach((lap) => {
+			totalSeconds += +lap.getTotalTimeInSeconds();
+		});
+		// Round to 2 decimal places
+		totalSeconds = Math.round(totalSeconds * 100) / 100;
+		return totalSeconds;
+	};
+
 	// function to update the end time for a lap
 	const updateEndTime = (lapId, endTime) => {
 		const newLaps = laps.map((lap) => {
@@ -125,6 +136,7 @@ const LapProvider = ({ children }) => {
 				updateEndTime,
 				getTotalAmountSum,
 				getTotalTimeSpent,
+				getTotalTimeSpentSeconds,
 			}}
 		>
 			{children}

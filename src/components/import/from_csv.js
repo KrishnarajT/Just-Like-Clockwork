@@ -25,6 +25,7 @@ function uploadCSV(callback) {
 							row["Seconds"],
 							row["Work Done"],
 							row["Hourly Amount"],
+							row["ID"]
 						),
 				);
 

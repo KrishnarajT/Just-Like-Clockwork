@@ -9,8 +9,9 @@ class WorkLap {
 		current_seconds,
 		workDoneString,
 		HourlyAmount,
+		id = uuidv4(),
 	) {
-		this.id = uuidv4();
+		this.id = id;
 		this.startTime = startTime;
 		this.endTime = endTime;
 		this.current_hours = Number(current_hours);
@@ -73,6 +74,15 @@ class WorkLap {
 			this.current_minutes +
 			this.current_seconds / 60;
 		return totalMinutes.toFixed(2);
+	}
+
+	// get total time in Seconds
+	getTotalTimeInSeconds() {
+		const totalSeconds =
+			this.current_hours * 3600 +
+			this.current_minutes * 60 +
+			this.current_seconds;
+		return totalSeconds.toFixed(2);
 	}
 
 	// Setters

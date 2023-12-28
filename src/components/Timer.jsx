@@ -8,7 +8,12 @@ const Timer = ({
 	setClearTimer,
 	UpdateCurrentWorkLapTime,
 }) => {
-	console.log("Timer", lap);
+	// setting use state variables
+
+	// variable to hold start time
+	const [startTime, setStartTime] = useState(Date.parse(lap.getStartTime()));
+
+	// console.log("Timer", lap);
 	const [time, setTime] = useState({
 		hours: lap.getCurrentHours(),
 		minutes: lap.getCurrentMinutes(),
@@ -16,33 +21,63 @@ const Timer = ({
 	});
 
 	useEffect(() => {
+		// set starttime
+		setStartTime(Date.parse(lap.getStartTime()));
+	}, []);
+
+	useEffect(() => {
 		let interval = null;
 		if (isPlaying) {
+			// find paused time
+			const elapsedTimeMilliseconds =
+				(lap.getCurrentHours() * 3600 +
+					lap.getCurrentMinutes() * 60 +
+					lap.getCurrentSeconds()) *
+				1000;
+			let pausedTime = Date.now() - (startTime + elapsedTimeMilliseconds);
 			interval = setInterval(() => {
-				setTime((prevTime) => {
-					const seconds = prevTime.seconds + 1;
-					const minutes = prevTime.minutes + Math.floor(seconds / 60);
-					const hours = prevTime.hours + Math.floor(minutes / 60);
-					UpdateCurrentWorkLapTime(
-						lap.getId(),
-						hours % 24,
-						minutes % 60,
-						seconds % 60,
-					);
+				setTime(() => {
+					let curLapTimeMillisecond = Date.now() - startTime - pausedTime;
+					// console.log(
+					// 	"i just caluclated the current lap time",
+					// 	curLapTimeMillisecond
+					// );
+					let seconds = Math.floor(
+						(curLapTimeMillisecond / 1000) % 60
+					).toString();
+					let minutes = Math.floor(
+						(curLapTimeMillisecond / (1000 * 60)) % 60
+					).toString();
+					let hours = Math.floor(curLapTimeMillisecond / (1000 * 60 * 60));
+					seconds = parseInt(seconds, 10);
+					minutes = parseInt(minutes, 10);
+					hours = parseInt(hours, 10);
+
+					UpdateCurrentWorkLapTime(lap.getId(), hours, minutes, seconds);
+
+					// log everything
+					// console.log("start time", startTime);
+					// console.log("current time", Date.now());
+					// console.log("paused time", pausedTime);
+					// console.log("current lap time", curLapTimeMillisecond);
+					// console.log("hours", hours);
+					// console.log("minutes", minutes);
+					// console.log("seconds", seconds);
 					return {
-						hours: hours % 24,
-						minutes: minutes % 60,
-						seconds: seconds % 60,
+						hours: hours,
+						minutes: minutes,
+						seconds: seconds,
 					};
 				});
 			}, 1000);
 		} else {
 			clearInterval(interval);
+
 			UpdateCurrentWorkLapTime(
 				lap.getId(),
 				time.hours,
 				time.minutes,
-				time.seconds,
+				time.seconds
 			);
 		}
 
@@ -52,8 +87,10 @@ const Timer = ({
 				lap.getId(),
 				time.hours,
 				time.minutes,
-				time.seconds,
+				time.seconds
 			);
+			// set starttime
+			setStartTime(Date.parse(lap.getStartTime()));
 			setClearTimer(false);
 		}
 

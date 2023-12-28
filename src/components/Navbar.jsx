@@ -53,12 +53,12 @@ export default function Navbar() {
 	};
 
 	const handleImportCSV = (laps) => {
-		console.log(laps);
+		// console.log(laps);
 		setLaps(laps);
 	};
 
 	const handleImportJSON = (laps) => {
-		console.log(laps);
+		// console.log(laps);
 		setLaps(laps);
 	};
 

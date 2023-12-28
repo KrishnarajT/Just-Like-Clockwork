@@ -16,7 +16,7 @@ function uploadJSON(callback) {
 		reader.onload = (e) => {
 			// Parse the JSON string
 			let data = JSON.parse(e.target.result);
-			console.log(data)
+			// console.log(data);
 			// Convert the data to WorkLap objects
 			let laps = data.map(
 				(lap) =>
@@ -28,9 +28,10 @@ function uploadJSON(callback) {
 						lap.current_seconds,
 						lap.workDoneString,
 						lap.HourlyAmount,
-					),
+						lap.id
+					)
 			);
-			console.log(laps)
+			// console.log(laps);
 
 			// Call the callback function with the laps array
 			callback(laps);

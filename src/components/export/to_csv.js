@@ -18,7 +18,10 @@ function downloadCSV(laps) {
 		if (endTime === 0) {
 			endTime = "Not yet done";
 		}
-		csvContent += `${lap.id},${startTime},${endTime},${lap.current_hours},${lap.current_minutes},${lap.current_seconds},${lap.workDoneString},${lap.HourlyAmount}\n`;
+
+		const workDoneString = lap.workDoneString.replace(/,/g, ";");
+
+		csvContent += `${lap.id},${startTime},${endTime},${lap.current_hours},${lap.current_minutes},${lap.current_seconds},${workDoneString},${lap.HourlyAmount}\n`;
 	});
 
 	// Create a Blob from the CSV content

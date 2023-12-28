@@ -1,5 +1,7 @@
 import { useState, useEffect } from "react";
 import PropTypes from "prop-types";
+import { useContext } from "react";
+import { LapContext } from "../context/LapContext";
 
 const TimerContinuous = ({ isPlaying, clearTimer, setClearTimer }) => {
 	const [time, setTime] = useState({
@@ -8,18 +10,23 @@ const TimerContinuous = ({ isPlaying, clearTimer, setClearTimer }) => {
 		seconds: 0,
 	});
 
+	const { getTotalTimeSpentSeconds } = useContext(LapContext);
+
 	useEffect(() => {
 		let interval = null;
 		if (isPlaying) {
 			interval = setInterval(() => {
-				setTime((prevTime) => {
-					const seconds = prevTime.seconds + 1;
-					const minutes = prevTime.minutes + Math.floor(seconds / 60);
-					const hours = prevTime.hours + Math.floor(minutes / 60);
+				setTime(() => {
+					let time_spent = getTotalTimeSpentSeconds();
+
+					let hours = Math.floor(time_spent / 3600);
+					let minutes = Math.floor((time_spent - hours * 3600) / 60);
+					let seconds = Math.floor(time_spent - hours * 3600 - minutes * 60);
+
 					return {
-						hours: hours % 24,
-						minutes: minutes % 60,
-						seconds: seconds % 60,
+						hours: hours,
+						minutes: minutes,
+						seconds: seconds,
 					};
 				});
 			}, 1000);

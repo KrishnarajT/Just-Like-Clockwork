@@ -1,7 +1,7 @@
 import { jsPDF } from "jspdf";
 import "jspdf-autotable";
 
-function downloadPDF(laps, total_amount, total_hours, total_laps) {
+function downloadPDF(laps, total_amount, total_minutes, total_laps) {
 	// Create a new jsPDF instance
 	const doc = new jsPDF();
 
@@ -34,7 +34,7 @@ function downloadPDF(laps, total_amount, total_hours, total_laps) {
 	doc.autoTable({
 		head: [columns],
 		body: rows,
-		foot: [[total_laps, "Total", "", total_hours, "", "", "", total_amount]],
+		foot: [[total_laps, "Total", "", "", total_minutes, "", "", total_amount]],
 		footStyles: { fillColor: [41, 128, 185], textColor: 255 },
 	});
 
