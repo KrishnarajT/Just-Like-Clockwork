@@ -1,8 +1,34 @@
-# React + Vite
+# Just-Like-Clockwork
+A Lap Timer to record what work is done hourly, and export a report for the same, so I can charge an hourly work rate for Freelancing
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+# Screenshots
 
-Currently, two official plugins are available:
+## Timer
+![](./screenshots/1.png)
+![](./screenshots/2.png)
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## Stats
+![](./screenshots/4.png)
+![](./screenshots/3.png)
+
+# Features
+- Timer
+- Stats
+- Export to CSV
+- Export to PDF
+- Export to Local Browser storage, so refresh wont lose progress. 
+- Export to JSON
+- Import from JSON
+- Import from CSV
+- Import from Local Storage
+- 5 Themes to choose from 
+
+
+# Made with: 
+- React
+- Tailwind CSS
+- React Router
+- Tabler Icons
+- Daisy UI
+
+So special thanks to all of these projects that made this one possible. I hope you have fun using this!
