@@ -24,6 +24,15 @@ A Lap Timer to record what work is done hourly, and export a report for the same
 - 5 Themes to choose from 
 
 
+# To Do
+- Make a details page for creating the pdf invoice
+- Add details in the pdf when exporting the invoice
+- Add Pomodoro timer
+- Add a home page, and in that include different types of timers. 
+- Add an about page. 
+- Add login and signup, and a page to manage all your timers. You can add and delete and manage multiple timers on one page. 
+
+
 # Made with: 
 - React
 - Tailwind CSS
