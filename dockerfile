@@ -1,5 +1,5 @@
 # get image for node js
-FROM node:14
+FROM node:latest
 
 # Set the working directory in the container
 WORKDIR /app
@@ -18,5 +18,4 @@ COPY . .
 EXPOSE 5173
 
 # Serve the app
-CMD ["npm", "run", "dev"]
-
+CMD ["vite", "--host"]
