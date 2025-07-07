@@ -17,17 +17,8 @@ import { StopButton } from "../components/ui/StopButton";
 import { LapIcon } from "../components/ui/LapIcon";
 import { StartButton } from "../components/ui/StartButton";
 import TimerContinuous from "../components/TimerContinuous";
-import {
-	IconBrandDiscord,
-	IconBrandGithub,
-	IconBrandGmail,
-	IconBrandInstagram,
-	IconBrandLinkedin,
-	IconBrandStackoverflow,
-	IconBrandTelegram,
-	IconBrandWhatsapp,
-	IconPhoneCall,
-} from "@tabler/icons-react";
+
+import Footer from "../components/Footer";
 const Home = () => {
 	const { theme } = React.useContext(ThemeContext);
 	useEffect(() => {
@@ -96,7 +87,7 @@ const Home = () => {
 	// }
 
 	return (
-		<div>
+		<div className="min-h-screen flex flex-col">
 			{laps.length > 0 ? (
 				<div className="flex justify-center items-center h-48  gap-16 m-10">
 					<div className="outline p-8 rounded-xl pb-2 outline-secondary">
@@ -284,120 +275,7 @@ const Home = () => {
 				</div>
 			</div>
 
-			{/* footer */}
-			<footer className="footer footer-center p-10 bg-base-200 text-base-content rounded">
-				<label className="label text-xl ">
-					Developed by Krishnaraj T, for Keeping track of work done. <br></br>
-					Feel free to contribute, or use it for your own use :) <br />
-					<br />
-					Contact me at:
-				</label>
-				<div className="flex flex-wrap gap-4 m-4 mt-0 justify-center">
-					<button
-						className="btn btn-neutral btn-circle btn-lg"
-						onClick={() => {
-							// copy the phone number to clipboard
-							// show the toast
-							navigator.clipboard.writeText("+91 9834312135");
-							const toast = document.querySelector(".toast");
-							toast.classList.remove("hidden");
-							setTimeout(() => {
-								toast.classList.add("hidden");
-							}, 2000);
-							// show toast
-							// open the phone app
-							// window.open("tel:+919834312135", "_blank");
-						}}
-					>
-						<IconPhoneCall stroke={1} className="w-8 h-8" />
-					</button>
-					<button
-						className="btn btn-neutral btn-circle btn-lg"
-						onClick={() => {
-							window.open("https://wa.link/zu05s5", "_blank");
-						}}
-					>
-						<IconBrandWhatsapp stroke={1} className="w-8 h-8" />
-					</button>
-					<button
-						className="btn btn-neutral btn-circle btn-lg"
-						onClick={() => {
-							window.open("mailto:kpt.krishnaraj@gmail.com", "_blank");
-						}}
-					>
-						<IconBrandGmail stroke={1} className="w-8 h-8" />
-					</button>
-					<button
-						className="btn btn-neutral btn-circle btn-lg"
-						onClick={() => {
-							window.open("https://www.github.com/KrishnarajT", "_blank");
-							navigator.clipboard.writeText(
-								"https://www.github.com/KrishnarajT"
-							);
-							const toast = document.querySelector(".toast");
-							toast.classList.remove("hidden");
-							setTimeout(() => {
-								toast.classList.add("hidden");
-							}, 2000);
-						}}
-						// copy to clipboard and show toast.
-					>
-						<IconBrandGithub stroke={1} className="w-8 h-8" />
-					</button>
-					<button
-						className="btn btn-neutral btn-circle btn-lg"
-						onClick={() => {
-							window.open("https://t.me/KrishnarajT", "_blank");
-						}}
-					>
-						<IconBrandTelegram stroke={1} className="w-8 h-8" />
-					</button>
-					<button
-						className="btn btn-neutral btn-circle btn-lg"
-						onClick={() => {
-							window.open(
-								"https://www.linkedin.com/in/krishnaraj-thadesar-2541451b9/",
-								"_blank"
-							);
-						}}
-					>
-						<IconBrandLinkedin stroke={1} className="w-8 h-8" />
-					</button>
-					<button
-						className="btn btn-neutral btn-circle btn-lg"
-						onClick={() => {
-							window.open("https://www.instagram.com/krish11235/", "_blank");
-						}}
-					>
-						<IconBrandInstagram stroke={1} className="w-8 h-8" />
-					</button>
-					<button
-						className="btn btn-neutral btn-circle btn-lg"
-						onClick={() => {
-							window.open(
-								"https://discordapp.com/users/Krishnaraj#2271",
-								"_blank"
-							);
-						}}
-					>
-						<IconBrandDiscord stroke={1} className="w-8 h-8" />
-					</button>
-					<button
-						className="btn btn-neutral btn-circle btn-lg"
-						onClick={() => {
-							window.open(
-								"https://stackoverflow.com/users/14205274/krishnaraj-pt",
-								"_blank"
-							);
-						}}
-					>
-						<IconBrandStackoverflow stroke={1} className="w-8 h-8" />
-					</button>
-				</div>
-				<aside>
-					<p>Developed by Krishnaraj T.</p>
-				</aside>
-			</footer>
+			<Footer />
 		</div>
 	);
 };
