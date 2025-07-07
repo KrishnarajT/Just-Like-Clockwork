@@ -10,7 +10,7 @@ export default function Table({ updateWorkDoneByID }) {
   return (
     <div>
       {laps.length > 0 ? (
-        <div className="overflow-x-auto m-6 outline outline-secondary rounded-2xl scroll-auto">
+        <div className="overflow-x-auto m-6 outline outline-base-500 rounded-2xl scroll-auto">
           <table className="table table-lg text-xl">
             {/* head */}
             <thead className="">
@@ -38,7 +38,7 @@ export default function Table({ updateWorkDoneByID }) {
                         }
                       </span>
                       <br />
-                      <span className="text-secondary">
+                      <span className="text-base-500">
                         {lap.getStartDayAndDateDict().date}
                       </span>
 
@@ -87,7 +87,7 @@ export default function Table({ updateWorkDoneByID }) {
         </div>
       ) : (
         // tell user to start adding new laps
-        <div className="flex justify-center items-center h-fit gap-16 m-10 outline p-6 rounded-xl outline-secondary min-h-64 text-2xl text-secondary flex-col">
+        <div className="flex justify-center items-center h-fit gap-16 m-10 outline p-6 rounded-xl outline-base-500 min-h-64 text-2xl text-base-500 flex-col">
           <RandomSVG />
           <div className="flex gap-1 items-center justify-center text-center">
             <div>No Laps Added Yet! Start by clicking</div>

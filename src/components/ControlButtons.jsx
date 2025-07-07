@@ -52,8 +52,8 @@ export default function ControlButtons({
               (getLapFromId(lap).getCurrentHours() === 0 &&
                 getLapFromId(lap).getCurrentMinutes() === 0)
             )
-              ? 'text-secondary transition-all duration-300 hover:text-primary hover:scale-90'
-              : 'text-secondary cursor-not-allowed'
+              ? 'text-base-500 transition-all duration-300 hover:text-primary hover:scale-90'
+              : 'text-base-500 cursor-not-allowed'
           }`}
         />
       </button>
@@ -69,16 +69,16 @@ export default function ControlButtons({
           <PauseButton
             className={`w-24 h-24 ${
               started
-                ? 'text-secondary transition-all duration-300 hover:text-primary'
-                : 'text-secondary cursor-not-allowed'
+                ? 'text-base-500 transition-all duration-300 hover:text-primary'
+                : 'text-base-500 cursor-not-allowed'
             }`}
           />
         ) : (
           <PlayButton
             className={`w-24 h-24 ${
               started
-                ? 'text-secondary transition-all duration-300 hover:text-primary'
-                : 'text-secondary cursor-not-allowed'
+                ? 'text-base-500 transition-all duration-300 hover:text-primary'
+                : 'text-base-500 cursor-not-allowed'
             }`}
           />
         )}

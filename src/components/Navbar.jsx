@@ -19,7 +19,43 @@ export default function Navbar() {
   useEffect(() => {
     themeChange(false);
   }, []);
-
+  const themes = [
+    "business",
+    "forest",
+    "nord",
+    "corporate",
+    "dracula",
+    "light",
+    "dark",
+    "cupcake",
+    "bumblebee",
+    "emerald",
+    "synthwave",
+    "retro",
+    "cyberpunk",
+    "valentine",
+    "halloween",
+    "garden",
+    "aqua",
+    "lofi",
+    "pastel",
+    "fantasy",
+    "wireframe",
+    "black",
+    "luxury",
+    "cmyk",
+    "autumn",
+    "acid",
+    "lemonade",
+    "night",
+    "coffee",
+    "winter",
+    "dim",
+    "sunset",
+    "caramellatte",
+    "abyss",
+    "silk"
+  ];
   const [amount, setAmount] = useState(250);
   const { laps, updateAmount, getTotalAmountSum, getTotalTimeSpent, setLaps } =
     React.useContext(LapContext);
@@ -64,7 +100,7 @@ export default function Navbar() {
   };
 
   return (
-    <div className="navbar bg-neutral">
+    <div className="navbar bg-neutral px-2 py-2">
       <div className="flex-1">
         <div className="flex items-center">
           <ClockIcon className="w-14 h-14 text-neutral-content" />
@@ -137,91 +173,43 @@ export default function Navbar() {
             </details>
           </li>
           <div className="dropdown dropdown-end" data-choose-theme>
-            <div tabIndex={0} role="button" className="btn m-1 btn-neutral text-neutral-content text-xl font-normal">
+            <div
+              tabIndex={0}
+              role="button"
+              className="btn btn-neutral text-neutral-content text-xl font-normal"
+            >
               Theme
               <svg
                 width="12px"
                 height="12px"
-                className="inline-block h-2 w-2 fill-current opacity-60"
+                className="inline-block h-2 w-2 fill-current opacity-60 ml-1"
                 xmlns="http://www.w3.org/2000/svg"
-                viewBox="0 0 2048 2048">
+                viewBox="0 0 2048 2048"
+              >
                 <path d="M1799 349l242 241-1017 1017L7 590l242-241 775 775 775-775z"></path>
               </svg>
             </div>
-            <ul tabIndex={0} className="dropdown-content bg-base-300 rounded-box z-1 p-2 shadow-2xl" data-choose-theme>
-              <li>
-                <input 
-                  type="radio"
-                  name="theme-dropdown"
-                  className="theme-controller w-full btn btn-sm btn-block btn-ghost justify-start text-lg"
-                  aria-label="Dracula"
-                  defaultChecked={theme === 'dracula'}
-                  onChange={() => setTheme('dracula')}
-                  value="dracula" />
-              </li>
-              <li>
-                <input
-                  type="radio"
-                  name="theme-dropdown"
-                  className="theme-controller w-full btn btn-sm btn-block btn-ghost justify-start text-lg"
-                  aria-label="Forest"
-                  value="forest" />
-              </li>
-              <li>
-                <input
-                  type="radio"
-                  name="theme-dropdown"
-                  className="theme-controller w-full btn btn-sm btn-block btn-ghost justify-start text-lg"
-                  defaultChecked={theme === 'business'}
-                  onChange={() => setTheme('business')}
-                  aria-label="Business"
-                  value="business" />
-              </li>
-              <li>
-                <input
-                  type="radio"
-                  name="theme-dropdown"
-                  className="theme-controller w-full btn btn-sm btn-block btn-ghost justify-start text-lg"
-                  defaultChecked={theme === 'corporate'}
-                  onChange={() => setTheme('corporate')}
-                  aria-label="Corporate"
-                  value="corporate" />
-              </li>
-              <li>
-                <input
-                  type="radio"
-                  name="theme-dropdown"
-                  className="theme-controller w-full btn btn-sm btn-block btn-ghost justify-start text-lg"
-                  defaultChecked={theme === 'nord'}
-                  onChange={() => setTheme('nord')}
-                  aria-label="Nord"
-                  value="nord"
-                />
-              </li>
+
+            <ul
+              tabIndex={0}
+              className="dropdown-content bg-base-300 rounded-box z-10 p-4 shadow-2xl max-h-96 overflow-y-auto"
+              data-choose-theme
+            >
+              {themes.map((t) => (
+                <li key={t}>
+                  <input
+                    type="radio"
+                    name="theme-dropdown"
+                    className="theme-controller w-full btn btn-sm btn-block btn-ghost justify-start text-lg capitalize hover:bg-base-100"
+                    aria-label={t}
+                    value={t}
+                    checked={theme === t}
+                    onChange={() => setTheme(t)}
+                  />
+                </li>
+              ))}
             </ul>
           </div>
-          {/* <li>
-            <details>
-              <summary className="text-xl mx-2  text-neutral-content">Theme</summary>
-              <ul className="p-2 bg-base-100 rounded-t-none">
-                <li>
-                  <a onClick={() => setTheme('forest')}>Forest</a>
-                </li>
-                <li>
-                  <a onClick={() => setTheme('dracula')}>Dracula</a>
-                </li>
-                <li>
-                  <a onClick={() => setTheme('business')}>Business</a>
-                </li>
-                <li>
-                  <a onClick={() => setTheme('corporate')}>Corporate</a>
-                </li>
-                <li>
-                  <a onClick={() => setTheme('wireframe')}>Wireframe</a>
-                </li>
-              </ul>
-            </details>
-          </li> */}
         </ul>
       </div>
     </div>
