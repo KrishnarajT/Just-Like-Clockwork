@@ -1,0 +1,34 @@
+import { useContext } from 'react';
+import { LapContext } from '../context/LapContext';
+
+export default function Statistics() {
+  const { laps, getTotalAmountSum, getTotalTimeSpent } = useContext(LapContext);
+
+  return (
+    <div className="w-full flex flex-col justify-center items-center my-10 outline p-6">
+      {/* <div className="font-bold text-6xl">Statistics</div> */}
+      <div className="stats">
+        <div className="stat">
+          <div className="stat-figure text-secondary"></div>
+          <div className="stat-title text-xl pb-2">Tasks Completed</div>
+          <div className="font-bold text-accent text-6xl">{laps.length}</div>
+          <div className="stat-desc text-xl pt-4">The Total number of laps.</div>
+        </div>
+
+        <div className="stat">
+          <div className="stat-figure text-secondary"></div>
+          <div className="stat-title text-xl pb-2">Total Minutes Spent Working</div>
+          <div className="font-bold text-accent text-6xl">{getTotalTimeSpent()}</div>
+          <div className="stat-desc text-xl pt-4">Sum of time on all laps.</div>
+        </div>
+
+        <div className="stat">
+          <div className="stat-figure text-secondary pb-2"></div>
+          <div className="stat-title text-xl">Total Amount Earned</div>
+          <div className="text-accent text-6xl font-bold">{'₹ ' + getTotalAmountSum()}</div>
+          <div className="stat-desc text-xl pt-4">Sum of amount on all laps.</div>
+        </div>
+      </div>
+    </div>
+  );
+}

@@ -1,6 +1,6 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState } from 'react';
 
-const svgs = import.meta.glob("../../assets/svgs/*.svg", { eager: true });
+const svgs = import.meta.glob('../../assets/svgs/*.svg', { eager: true });
 
 export default function RandomSVG() {
   const [src, setSrc] = useState(null);
