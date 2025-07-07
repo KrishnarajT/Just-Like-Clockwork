@@ -3,8 +3,16 @@ import Home from './pages/Home';
 import Navbar from './components/Navbar';
 import LapProvider from './context/LapContext';
 import ThemeContextProvider from './context/ThemeContext';
+import { useEffect } from 'react'
+import { themeChange } from 'theme-change'
 
 function App() {
+
+  useEffect(() => {
+    themeChange(false)
+    // 👆 false parameter is required for react project
+  }, [])
+  
   return (
     <LapProvider>
       <ThemeContextProvider>

@@ -11,33 +11,14 @@ import exportCSV from '../components/export/to_csv';
 import exportJSON from '../components/export/to_json';
 import exportPDF from '../components/export/to_pdf';
 import exportBrowser from './export/to_local';
-import { themeChange } from 'theme-change';
 import { ThemeContext } from '../context/ThemeContext';
+import { themeChange } from 'theme-change'
 
 export default function Navbar() {
   const { theme, setTheme } = React.useContext(ThemeContext);
   useEffect(() => {
     themeChange(false);
   }, []);
-
-  useEffect(() => {
-    if (theme === 'business') {
-      const light_button = document.getElementById('business_button');
-      light_button.click();
-    } else if (theme === 'dracula') {
-      const dark_button = document.getElementById('dracula_button');
-      dark_button.click();
-    } else if (theme === 'forest') {
-      const dark_button = document.getElementById('forest_button');
-      dark_button.click();
-    } else if (theme === 'corporate') {
-      const dark_button = document.getElementById('corporate_button');
-      dark_button.click();
-    } else if (theme === 'wireframe') {
-      const dark_button = document.getElementById('wireframe_button');
-      dark_button.click();
-    }
-  });
 
   const [amount, setAmount] = useState(250);
   const { laps, updateAmount, getTotalAmountSum, getTotalTimeSpent, setLaps } =
@@ -85,12 +66,12 @@ export default function Navbar() {
   return (
     <div className="navbar bg-neutral">
       <div className="flex-1">
-        <div className="flex">
+        <div className="flex items-center">
           <ClockIcon className="w-14 h-14 text-neutral-content" />
+          <Link to="/">
+            <a className="btn btn-ghost text-2xl text-neutral-content">Just Like Clockwork</a>
+          </Link>
         </div>
-        <Link to="/">
-          <a className="btn btn-ghost text-2xl text-neutral-content">Just Like Clockwork</a>
-        </Link>
       </div>
       <div className="flex-none">
         <ul className="menu menu-horizontal px-1">
@@ -155,7 +136,71 @@ export default function Navbar() {
               </ul>
             </details>
           </li>
-          <li>
+          <div className="dropdown dropdown-end" data-choose-theme>
+            <div tabIndex={0} role="button" className="btn m-1 btn-neutral text-neutral-content text-xl font-normal">
+              Theme
+              <svg
+                width="12px"
+                height="12px"
+                className="inline-block h-2 w-2 fill-current opacity-60"
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 2048 2048">
+                <path d="M1799 349l242 241-1017 1017L7 590l242-241 775 775 775-775z"></path>
+              </svg>
+            </div>
+            <ul tabIndex={0} className="dropdown-content bg-base-300 rounded-box z-1 p-2 shadow-2xl" data-choose-theme>
+              <li>
+                <input 
+                  type="radio"
+                  name="theme-dropdown"
+                  className="theme-controller w-full btn btn-sm btn-block btn-ghost justify-start text-lg"
+                  aria-label="Dracula"
+                  defaultChecked={theme === 'dracula'}
+                  onChange={() => setTheme('dracula')}
+                  value="dracula" />
+              </li>
+              <li>
+                <input
+                  type="radio"
+                  name="theme-dropdown"
+                  className="theme-controller w-full btn btn-sm btn-block btn-ghost justify-start text-lg"
+                  aria-label="Forest"
+                  value="forest" />
+              </li>
+              <li>
+                <input
+                  type="radio"
+                  name="theme-dropdown"
+                  className="theme-controller w-full btn btn-sm btn-block btn-ghost justify-start text-lg"
+                  defaultChecked={theme === 'business'}
+                  onChange={() => setTheme('business')}
+                  aria-label="Business"
+                  value="business" />
+              </li>
+              <li>
+                <input
+                  type="radio"
+                  name="theme-dropdown"
+                  className="theme-controller w-full btn btn-sm btn-block btn-ghost justify-start text-lg"
+                  defaultChecked={theme === 'corporate'}
+                  onChange={() => setTheme('corporate')}
+                  aria-label="Corporate"
+                  value="corporate" />
+              </li>
+              <li>
+                <input
+                  type="radio"
+                  name="theme-dropdown"
+                  className="theme-controller w-full btn btn-sm btn-block btn-ghost justify-start text-lg"
+                  defaultChecked={theme === 'nord'}
+                  onChange={() => setTheme('nord')}
+                  aria-label="Nord"
+                  value="nord"
+                />
+              </li>
+            </ul>
+          </div>
+          {/* <li>
             <details>
               <summary className="text-xl mx-2  text-neutral-content">Theme</summary>
               <ul className="p-2 bg-base-100 rounded-t-none">
@@ -176,7 +221,7 @@ export default function Navbar() {
                 </li>
               </ul>
             </details>
-          </li>
+          </li> */}
         </ul>
       </div>
     </div>

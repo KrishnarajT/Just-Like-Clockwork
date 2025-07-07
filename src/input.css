@@ -1,6 +1,9 @@
-@import 'tailwindcss';
-@plugin "daisyui";
+@tailwind utilities;
 
+@import 'tailwindcss';
+@plugin "daisyui" {
+  themes: all;
+}
 /* Customize the scrollbar */
 ::-webkit-scrollbar {
   width: 4px;

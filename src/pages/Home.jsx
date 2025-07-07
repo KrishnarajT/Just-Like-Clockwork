@@ -1,6 +1,6 @@
 // importing basics
 import { useState, useContext, useEffect } from 'react';
-import { ThemeContext } from '../context/ThemeContext';
+// import { ThemeContext } from '../context/ThemeContext';
 import React from 'react';
 
 // importing contexts
@@ -14,25 +14,6 @@ import Table from '../components/Table';
 import ControlButtons from '../components/ControlButtons';
 
 const Home = () => {
-  const { theme } = React.useContext(ThemeContext);
-  useEffect(() => {
-    if (theme === 'business') {
-      const light_button = document.getElementById('business_button');
-      light_button.click();
-    } else if (theme === 'dracula') {
-      const dark_button = document.getElementById('dracula_button');
-      dark_button.click();
-    } else if (theme === 'forest') {
-      const dark_button = document.getElementById('forest_button');
-      dark_button.click();
-    } else if (theme === 'corporate') {
-      const dark_button = document.getElementById('corporate_button');
-      dark_button.click();
-    } else if (theme === 'wireframe') {
-      const dark_button = document.getElementById('wireframe_button');
-      dark_button.click();
-    }
-  });
 
   const { laps, updateWorkDoneByID } = useContext(LapContext);
 

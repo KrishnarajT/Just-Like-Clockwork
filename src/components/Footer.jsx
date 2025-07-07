@@ -12,7 +12,7 @@ import {
 export default function Footer() {
   return (
     <footer className="footer footer-center px-10 bg-base-200 text-base-content rounded flex justify-between">
-      <div className="label text-xl">
+      <div className="label text-xl flex">
         Developed by{' '}
         <span
           className="text-accent link p-0 m-0"
@@ -70,7 +70,7 @@ export default function Footer() {
               toast.classList.add('hidden');
             }, 2000);
           }}
-          // copy to clipboard and show toast.
+        // copy to clipboard and show toast.
         >
           <IconBrandGithub stroke={1} className="w-8 h-8" />
         </button>
