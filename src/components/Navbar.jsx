@@ -100,11 +100,13 @@ export default function Navbar() {
   };
 
   const handleImportCSV = (laps) => {
+    uploadCSV(laps)
     // console.log(laps);
     setLaps(laps);
   };
 
   const handleImportJSON = (laps) => {
+    uploadJSON(laps)
     // console.log(laps);
     setLaps(laps);
   };
@@ -146,7 +148,7 @@ export default function Navbar() {
             <div tabIndex={0} role="button" className="btn btn-neutral text-neutral-content text-xl font-normal">Import</div>
             <ul tabIndex={0} className="dropdown-content menu bg-base-100 rounded-box z-1 w-52 p-2 shadow-sm w-fit">
               <li><a
-                onClick={handleImportBrowser}
+                onClick={handleImportCSV}
               >CSV</a></li>
               <li><a
                 onClick={handleImportJSON}
