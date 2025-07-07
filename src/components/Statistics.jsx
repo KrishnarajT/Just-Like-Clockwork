@@ -20,9 +20,9 @@ export default function Statistics() {
 
         <div className="stat">
           <div className="stat-figure text-secondary"></div>
-          <div className="stat-title text-xl pb-2">Total Minutes Spent on Break</div>
+          <div className="stat-title text-xl pb-2">Break Minutes</div>
           <div className="font-bold text-accent text-6xl">{getTotalBreakTimeSpentMinutes()}</div>
-          <div className="stat-desc text-xl pt-4">Sum of time on all breaks.</div>
+          <div className="stat-desc text-xl pt-4">Sum of time on breaks.</div>
         </div>
 
         <div className="stat">

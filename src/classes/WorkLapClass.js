@@ -67,7 +67,7 @@ class WorkLap {
     const totalSeconds =
       this.current_hours * 3600 + this.current_minutes * 60 + this.current_seconds;
     const amount = this.HourlyAmount * (totalSeconds / 3600);
-    return amount.toFixed(3);
+    return Number(amount.toFixed(3));
   }
 
   // get total time in Minutes
@@ -81,6 +81,63 @@ class WorkLap {
     const totalSeconds =
       this.current_hours * 3600 + this.current_minutes * 60 + this.current_seconds;
     return totalSeconds.toFixed(2);
+  }
+
+  getStartTimeDate() {
+    return new Date(this.startTime);
+  }
+
+  getEndTimeDate() {
+    return new Date(this.endTime);
+  }
+
+  getStartTimeDateFormatted() {
+    // Get 24-hour time in HHMM
+    const time = new Intl.DateTimeFormat('en-GB', {
+      hour: '2-digit',
+      minute: '2-digit',
+      hour12: true, // Use 12-hour format
+      timeZone: 'Asia/Kolkata', // Ensure consistent formatting regardless of local timezone
+    })
+      .format(this.getStartTimeDate())
+      .toUpperCase(); // "12:30 PM"
+
+    return time;
+  }
+
+  getEndTimeDateFormatted() {
+    if (this.endTime === 0) {
+      return 'DNF';
+    }
+
+    // Get 24-hour time in HHMM
+    const time = new Intl.DateTimeFormat('en-GB', {
+      hour: '2-digit',
+      minute: '2-digit',
+      hour12: true, // Use 12-hour format
+      timeZone: 'Asia/Kolkata', // Ensure consistent formatting regardless of local timezone
+    })
+      .format(this.getEndTimeDate())
+      .toUpperCase(); // "12:30 PM"
+
+    return time;
+  }
+
+  getStartDayAndDateDict() {
+    const date = this.getStartTimeDate();
+    const days = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
+
+    // Get date as "1 Jan 2025"
+    const formattedDate = new Intl.DateTimeFormat('en-GB', {
+      day: 'numeric',
+      month: 'short',
+      year: 'numeric',
+    }).format(this.getStartTimeDate()); // "1 Jan 2025"
+
+    return {
+      day: days[date.getDay()],
+      date: formattedDate,
+    };
   }
 
   // Setters

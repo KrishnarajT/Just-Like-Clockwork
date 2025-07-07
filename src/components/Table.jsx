@@ -16,11 +16,12 @@ export default function Table({ updateWorkDoneByID }) {
             <thead className="">
               <tr className="text-2xl">
                 <th className="w-4">ID</th>
-                <th className="w-48">Start Time</th>
-                <th className="w-48">End Time</th>
-                <th className="w-12">Elapsed Time</th>
+                <th className="w-12">Day</th>
+                <th className="w-36">Start Time</th>
+                <th className="w-36">End Time</th>
+                <th className="w-36">Elapsed Time</th>
                 <th className="w-1/3 break-words">Work Done</th>
-                <th className="w-12">Break?</th>
+                <th className="w-12">Break</th>
                 <th className="w-12">Amount</th>
               </tr>
             </thead>
@@ -30,9 +31,23 @@ export default function Table({ updateWorkDoneByID }) {
                 return (
                   <tr key={index + 1} className="text-2xl border-0">
                     <td className="w-fit text-2xl">{index + 1}</td>
-                    <td className="text-2xl">{lap.getStartTime()}</td>
                     <td className="text-2xl">
-                      {lap.getEndTime() === 0 ? 'Not finished yet' : lap.getEndTime()}
+                      <span className="text-accent">
+                        {
+                          lap.getStartDayAndDateDict().day
+                        }
+                      </span>
+                      <br />
+                      <span className="text-secondary">
+                        {lap.getStartDayAndDateDict().date}
+                      </span>
+
+                    </td>
+                    <td className="text-2xl">
+                      {lap.getStartTimeDateFormatted()}
+                    </td>
+                    <td className="text-2xl">
+                      {lap.getEndTimeDateFormatted()}
                     </td>
                     <td className="text-2xl">
                       {lap.getCurrentHours()}h: {lap.getCurrentMinutes()}m:{' '}
@@ -40,7 +55,7 @@ export default function Table({ updateWorkDoneByID }) {
                     </td>
                     <td className="text-2xl break-words">
                       <textarea
-                        className="textarea textarea-bordered w-full rounded-lg text-xl"
+                        className="textarea textarea-bordered w-full rounded-lg text-xl h-36"
                         placeholder="Type here"
                         value={lap.getWorkDoneString()}
                         onChange={(e) => {
@@ -63,7 +78,7 @@ export default function Table({ updateWorkDoneByID }) {
                       </div>
 
                     </td>
-                    <td className="text-2xl">{lap.getAmount()}</td>
+                    <td className="text-2xl"> {'₹ ' + lap.getAmount().toFixed(2)}</td>
                   </tr>
                 );
               })}

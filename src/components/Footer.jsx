@@ -22,7 +22,7 @@ export default function Footer() {
         >
           Krishnaraj T
         </span>{' '}
-        for Keeping track of work done. Feel free to contribute, or use it for yourself :)
+        for Keeping track of work done. Feel free to contribute, or use for yourself :)
       </div>
       <div className="flex flex-wrap gap-4 m-4 justify-center items-center">
         {/* <button
