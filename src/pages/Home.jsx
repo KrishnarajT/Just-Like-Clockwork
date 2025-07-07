@@ -150,7 +150,16 @@ const Home = () => {
 						}, 500);
 					}}
 				>
-					<LapIcon className="w-24 h-24 text-secondary transition-all duration-300 hover:text-primary hover:scale-90" />
+					<LapIcon
+						className={`w-24 h-24 ${!(
+								!started ||
+								(getLapFromId(lap).getCurrentHours() === 0 &&
+									getLapFromId(lap).getCurrentMinutes() === 0)
+							)
+								? "text-secondary transition-all duration-300 hover:text-primary hover:scale-90"
+								: "text-secondary cursor-not-allowed"
+							}`}
+					/>
 				</button>
 				<button
 					disabled={!started}
@@ -161,9 +170,13 @@ const Home = () => {
 					}}
 				>
 					{isPlaying ? (
-						<PauseButton className="w-24 h-24 text-secondary transition-all duration-300 hover:text-primary" />
+						<PauseButton className={`w-24 h-24 ${(started) ? "text-secondary transition-all duration-300 hover:text-primary"
+							: "text-secondary cursor-not-allowed"
+							}`} />
 					) : (
-						<PlayButton className="w-24 h-24 text-secondary transition-all duration-300 hover:text-primary" />
+						<PlayButton className={`w-24 h-24 ${(started) ? "text-secondary transition-all duration-300 hover:text-primary"
+								: "text-secondary cursor-not-allowed"
+							}`} />
 					)}
 				</button>
 				<button>
@@ -184,7 +197,7 @@ const Home = () => {
 						/>
 					) : (
 						<StopButton
-							className="w-24 h-24 text-error transition-all duration-300 hover:scale-90"
+							className="w-24 h-24 text-error"
 							onClick={() => {
 								setStarted(false);
 								setIsPlaying(false);
@@ -251,10 +264,10 @@ const Home = () => {
 				>
 					<RandomSVG />
 					<div className="flex gap-1 items-center justify-center text-center">
-							<div>
+						<div>
 							No Laps Added Yet! Start by clicking
-							</div>
-							<StartButton className="w-12 h-12 text-accent transition-all duration-200 hover:scale-90" /> above.
+						</div>
+						<StartButton className="w-12 h-12 text-accent transition-all duration-200 hover:scale-90" /> above.
 					</div>
 				</div>
 			)}

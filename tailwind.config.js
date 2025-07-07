@@ -12,6 +12,6 @@ module.exports = {
 	plugins: [require("daisyui")],
 	// daisyUI config (optional - here are the default values)
 	daisyui: {
-		themes: ["business", "dracula", "forest", "wireframe", "corporate"],
+		themes: all,
 	},
 };
