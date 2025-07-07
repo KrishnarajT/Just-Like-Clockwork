@@ -71,7 +71,6 @@ TimerDisplay.propTypes = {
   isPlaying: PropTypes.bool.isRequired,
   clearLapTimer: PropTypes.bool.isRequired,
   setClearLapTimer: PropTypes.func.isRequired,
-  UpdateCurrentWorkLapTime: PropTypes.func.isRequired,
   clearTimer: PropTypes.bool.isRequired,
   setClearTimer: PropTypes.func.isRequired,
   lap: PropTypes.string.isRequired,

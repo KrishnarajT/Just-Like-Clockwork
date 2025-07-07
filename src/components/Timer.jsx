@@ -29,10 +29,6 @@ const Timer = ({ lap, isPlaying, clearTimer, setClearTimer, UpdateCurrentWorkLap
       interval = setInterval(() => {
         setTime(() => {
           let curLapTimeMillisecond = Date.now() - startTime - pausedTime;
-          // console.log(
-          // 	"i just caluclated the current lap time",
-          // 	curLapTimeMillisecond
-          // );
           let seconds = Math.floor((curLapTimeMillisecond / 1000) % 60).toString();
           let minutes = Math.floor((curLapTimeMillisecond / (1000 * 60)) % 60).toString();
           let hours = Math.floor(curLapTimeMillisecond / (1000 * 60 * 60));

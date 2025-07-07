@@ -9,7 +9,8 @@ export const LapContext = createContext();
 const LapProvider = ({ children }) => {
   let Laps = getFromLocalStorage() || [];
   const [laps, setLaps] = useState(Laps);
-
+  const [breaksImpactAmount, setBreaksImpactAmount] = useState(false);
+  const [breaksImpactTime, setBreaksImpactTime] = useState(false);
   function handleLapLocalUpdate(laps) {
     setLaps(laps);
   }
@@ -80,7 +81,14 @@ const LapProvider = ({ children }) => {
   // Calculate the total amount sum of all laps
   const getTotalAmountSum = () => {
     let totalAmount = 0.0;
-    laps.forEach((lap) => {
+    laps
+      .filter((lap) => {
+        if (breaksImpactAmount) {
+          return !lap.isBreakLap; // Exclude break laps
+        }
+        return true; // Include all laps
+      })
+      .forEach((lap) => {
       totalAmount += parseFloat(lap.getAmount());
     });
     totalAmount = Math.round(totalAmount * 1000) / 1000; // Round to 3 decimal places
@@ -90,7 +98,13 @@ const LapProvider = ({ children }) => {
   // Calculate the total time spent in minutes
   const getTotalTimeSpent = () => {
     let totalMinutes = 0;
-    laps.forEach((lap) => {
+    laps
+      .filter((lap) => {
+        if (breaksImpactTime) {
+          return !lap.isBreakLap; // Exclude break laps
+        }
+        return true; // Include all laps
+      }).forEach((lap) => {
       totalMinutes += +lap.getTotalTimeInMinutes();
     });
     // Round to 2 decimal places
@@ -101,13 +115,34 @@ const LapProvider = ({ children }) => {
   // Calculate the total time spent in seconds
   const getTotalTimeSpentSeconds = () => {
     let totalSeconds = 0;
-    laps.forEach((lap) => {
-      totalSeconds += +lap.getTotalTimeInSeconds();
-    });
+    laps
+      .filter((lap) => {
+        if (breaksImpactTime) {
+          return !lap.isBreakLap; // Exclude break laps
+        }
+        return true; // Include all laps
+      })
+      .forEach((lap) => {
+        totalSeconds += +lap.getTotalTimeInSeconds();
+      });
     // Round to 2 decimal places
     totalSeconds = Math.round(totalSeconds * 100) / 100;
     return totalSeconds;
   };
+
+  // Calculate total time spent on breaks
+  const getTotalBreakTimeSpentMinutes = () => {
+    let totalBreakTime = 0;
+    laps
+      .filter((lap) => lap.isBreakLap)
+      .forEach((lap) => {
+        totalBreakTime += +lap.getTotalTimeInMinutes();
+      });
+    // Round to 2 decimal places
+    totalBreakTime = Math.round(totalBreakTime * 100) / 100;
+    return totalBreakTime;
+  };
+
 
   // function to update the end time for a lap
   const updateEndTime = (lapId, endTime) => {
@@ -125,6 +160,10 @@ const LapProvider = ({ children }) => {
     <LapContext.Provider
       value={{
         laps,
+        breaksImpactAmount,
+        breaksImpactTime,
+        setBreaksImpactAmount,
+        setBreaksImpactTime,
         setLaps,
         addLap,
         resetLaps,
@@ -137,6 +176,7 @@ const LapProvider = ({ children }) => {
         getTotalAmountSum,
         getTotalTimeSpent,
         getTotalTimeSpentSeconds,
+        getTotalBreakTimeSpentMinutes,
       }}
     >
       {children}

@@ -20,6 +20,7 @@ export default function Table({ updateWorkDoneByID }) {
                 <th className="w-48">End Time</th>
                 <th className="w-12">Elapsed Time</th>
                 <th className="w-1/3 break-words">Work Done</th>
+                <th className="w-12">Break?</th>
                 <th className="w-12">Amount</th>
               </tr>
             </thead>
@@ -46,6 +47,21 @@ export default function Table({ updateWorkDoneByID }) {
                           updateWorkDoneByID(lap.getId(), e.target.value);
                         }}
                       ></textarea>
+                    </td>
+                    <td className="text-2xl">
+                      <div
+                        className="flex justify-start items-center h-full w-full"
+                      >
+                        <input type="checkbox" className="checkbox border-primary outline-2 bg-base checked:border-green-900 checked:bg-base checked:text-orange-200"
+                          checked={lap.getIsBreakLap()}
+                          onChange={(e) => {
+                            // immediately change checked state
+                            lap.setIsBreakLap(e.target.checked);
+                            updateWorkDoneByID(lap.getId(), lap.getWorkDoneString());
+                          }}
+                        />
+                      </div>
+
                     </td>
                     <td className="text-2xl">{lap.getAmount()}</td>
                   </tr>

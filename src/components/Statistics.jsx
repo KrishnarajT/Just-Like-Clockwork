@@ -2,7 +2,7 @@ import { useContext } from 'react';
 import { LapContext } from '../context/LapContext';
 
 export default function Statistics() {
-  const { laps, getTotalAmountSum, getTotalTimeSpent } = useContext(LapContext);
+  const { laps, getTotalAmountSum, getTotalBreakTimeSpentMinutes } = useContext(LapContext);
 
   return (
     <div className="w-full flex flex-col justify-center items-center my-10 outline p-6">
@@ -11,15 +11,18 @@ export default function Statistics() {
         <div className="stat">
           <div className="stat-figure text-secondary"></div>
           <div className="stat-title text-xl pb-2">Tasks Completed</div>
-          <div className="font-bold text-accent text-6xl">{laps.length}</div>
-          <div className="stat-desc text-xl pt-4">The Total number of laps.</div>
+          <div className="font-bold text-accent text-6xl">
+            {laps
+              .filter((lap) => !lap.isBreakLap).length
+            }</div>
+          <div className="stat-desc text-xl pt-4">Laps Excluding Breaks</div>
         </div>
 
         <div className="stat">
           <div className="stat-figure text-secondary"></div>
-          <div className="stat-title text-xl pb-2">Total Minutes Spent Working</div>
-          <div className="font-bold text-accent text-6xl">{getTotalTimeSpent()}</div>
-          <div className="stat-desc text-xl pt-4">Sum of time on all laps.</div>
+          <div className="stat-title text-xl pb-2">Total Minutes Spent on Break</div>
+          <div className="font-bold text-accent text-6xl">{getTotalBreakTimeSpentMinutes()}</div>
+          <div className="stat-desc text-xl pt-4">Sum of time on all breaks.</div>
         </div>
 
         <div className="stat">

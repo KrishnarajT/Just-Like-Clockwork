@@ -18,6 +18,7 @@ class WorkLap {
     this.current_minutes = Number(current_minutes);
     this.current_seconds = Number(current_seconds);
     this.workDoneString = workDoneString;
+    this.isBreakLap = false;
     // type check hourly amount, if it is not a float, convert it to a float.
     if (typeof HourlyAmount !== 'number') {
       HourlyAmount = parseFloat(HourlyAmount);
@@ -56,6 +57,10 @@ class WorkLap {
 
   getWorkDoneString() {
     return this.workDoneString;
+  }
+
+  getIsBreakLap() {
+    return this.isBreakLap;
   }
 
   getAmount() {
@@ -105,6 +110,10 @@ class WorkLap {
 
   setHourlyAmount(amount) {
     this.HourlyAmount = Number(amount);
+  }
+
+  setIsBreakLap(isBreakLap) {
+    this.isBreakLap = isBreakLap;
   }
 }
 

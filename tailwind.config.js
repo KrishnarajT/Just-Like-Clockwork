@@ -2,7 +2,7 @@
 
 module.exports = {
   content: [
-    './src/App.jsx',
+    './src/*.jsx',
     './src/main.jsx',
     './src/components/**/*.jsx',
     './src/pages/*.jsx',
