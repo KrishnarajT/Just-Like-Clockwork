@@ -15,7 +15,7 @@ import ControlButtons from '../components/ControlButtons';
 
 const Home = () => {
 
-  const { laps, updateWorkDoneByID } = useContext(LapContext);
+  const { laps, updateWorkDoneByID, showStatsBeforeLaps } = useContext(LapContext);
 
   const [isPlaying, setIsPlaying] = useState(false);
   const [started, setStarted] = useState(false);
@@ -56,8 +56,9 @@ const Home = () => {
         lap={lap}
         setLap={setLap}
       />
-      <Statistics />
+      {showStatsBeforeLaps && <Statistics />}
       <Table laps={laps} updateWorkDoneByID={updateWorkDoneByID} />
+      {!showStatsBeforeLaps && <Statistics />}
       <Footer />
     </div>
   );

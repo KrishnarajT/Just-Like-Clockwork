@@ -5,7 +5,7 @@ import PropTypes from 'prop-types';
 import { LapContext } from '../context/LapContext';
 
 export default function Table({ updateWorkDoneByID }) {
-  const { laps } = useContext(LapContext);
+  const { laps, showAmount } = useContext(LapContext);
 
   return (
     <div>
@@ -22,7 +22,9 @@ export default function Table({ updateWorkDoneByID }) {
                 <th className="w-36">Elapsed Time</th>
                 <th className="w-1/3 break-words">Work Done</th>
                 <th className="w-12">Break</th>
-                <th className="w-12">Amount</th>
+                {showAmount && (
+                  <th className="w-12">Amount</th>
+                )}
               </tr>
             </thead>
             <tbody>
@@ -78,7 +80,9 @@ export default function Table({ updateWorkDoneByID }) {
                       </div>
 
                     </td>
-                    <td className="text-2xl"> {'₹ ' + lap.getAmount().toFixed(2)}</td>
+                    {showAmount && (
+                      <td className="text-2xl"> {'₹ ' + lap.getAmount().toFixed(2)}</td>
+                    )}
                   </tr>
                 );
               })}

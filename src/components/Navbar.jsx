@@ -86,8 +86,11 @@ export default function Navbar() {
     themeChange(false);
   }, []);
 
-  const [amount, setAmount] = useState(250);
-  const { laps, updateAmount, getTotalAmountSum, getTotalTimeSpent, setLaps } =
+  const [amount, setAmount] = useState(450);
+  const { laps, updateAmount, getTotalAmountSum, getTotalTimeSpent, setLaps, showAmount, setShowAmount, showStatsBeforeLaps, setShowStatsBeforeLaps,
+    updateBreaksImpactAmount, updateBreaksImpactTime, updateShowAmount, updateShowStatsBeforeLaps
+
+   } =
     React.useContext(LapContext);
 
   useEffect(() => {
@@ -248,10 +251,19 @@ export default function Navbar() {
                   <input
                     type="checkbox"
                     className="checkbox"
-                  // checked={selectedCols.length === allColumns.length}
-                  // onChange={toggleAll}
+                    checked={showAmount}
+                    onChange={() => updateShowAmount(!showAmount)}
                   />
                   <span className="ml-2 text-base-content">Show Amount</span>
+                </label>
+                <label className="label cursor-pointer text-lg font-semibold">
+                  <input
+                    type="checkbox"
+                    className="checkbox"
+                    checked={showStatsBeforeLaps}
+                    onChange={() => updateShowStatsBeforeLaps(!showStatsBeforeLaps)}
+                  />
+                  <span className="ml-2 text-base-content">Show stats before laps</span>
                 </label>
                 <legend className="fieldset-legend text-xl mb-2">Hourly Amount</legend>
                 <label className="label">

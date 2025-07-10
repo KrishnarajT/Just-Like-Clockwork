@@ -9,13 +9,51 @@ export const LapContext = createContext();
 const LapProvider = ({ children }) => {
   let Laps = getFromLocalStorage() || [];
   const [laps, setLaps] = useState(Laps);
+
   const [breaksImpactAmount, setBreaksImpactAmount] = useState(false);
   const [breaksImpactTime, setBreaksImpactTime] = useState(false);
+  const [showAmount, setShowAmount] = useState(true);
+  const [showStatsBeforeLaps, setShowStatsBeforeLaps] = useState(false);
   function handleLapLocalUpdate(laps) {
     setLaps(laps);
   }
 
   const [amount, setAmount] = useState(0.0);
+
+
+  // fetch the initial state from local storage
+  useEffect(() => {
+    const storedShowAmount = localStorage.getItem('showAmount');
+    const storedShowStatsBeforeLaps = localStorage.getItem('showStatsBeforeLaps');
+    const storedBreaksImpactAmount = localStorage.getItem('breaksImpactAmount');
+    const storedBreaksImpactTime = localStorage.getItem('breaksImpactTime');
+
+    setShowAmount(storedShowAmount ? JSON.parse(storedShowAmount) : true);
+    setShowStatsBeforeLaps(storedShowStatsBeforeLaps ? JSON.parse(storedShowStatsBeforeLaps) : false);
+    setBreaksImpactAmount(storedBreaksImpactAmount ? JSON.parse(storedBreaksImpactAmount) : false);
+    setBreaksImpactTime(storedBreaksImpactTime ? JSON.parse(storedBreaksImpactTime) : false);
+  }, []);
+
+  // Functions to update and persist state variables
+  const updateShowAmount = (value) => {
+    setShowAmount(value);
+    localStorage.setItem('showAmount', JSON.stringify(value));
+  };
+
+  const updateShowStatsBeforeLaps = (value) => {
+    setShowStatsBeforeLaps(value);
+    localStorage.setItem('showStatsBeforeLaps', JSON.stringify(value));
+  };
+
+  const updateBreaksImpactAmount = (value) => {
+    setBreaksImpactAmount(value);
+    localStorage.setItem('breaksImpactAmount', JSON.stringify(value));
+  };
+
+  const updateBreaksImpactTime = (value) => {
+    setBreaksImpactTime(value);
+    localStorage.setItem('breaksImpactTime', JSON.stringify(value));
+  };
 
   // Load laps from IndexedDB when the component mounts
   useEffect(() => {
@@ -89,9 +127,12 @@ const LapProvider = ({ children }) => {
         return true; // Include all laps
       })
       .forEach((lap) => {
-      totalAmount += parseFloat(lap.getAmount());
-    });
-    totalAmount = Math.round(totalAmount * 1000) / 1000; // Round to 3 decimal places
+        totalAmount += parseFloat(lap.getAmount());
+      });
+    // round to 3 decimal places
+    totalAmount = Math.round(totalAmount * 1000) / 1000;
+    // pad 0s if less than 3 decimal places
+    totalAmount = totalAmount.toFixed(3);
     return totalAmount;
   };
 
@@ -105,8 +146,8 @@ const LapProvider = ({ children }) => {
         }
         return true; // Include all laps
       }).forEach((lap) => {
-      totalMinutes += +lap.getTotalTimeInMinutes();
-    });
+        totalMinutes += +lap.getTotalTimeInMinutes();
+      });
     // Round to 2 decimal places
     totalMinutes = Math.round(totalMinutes * 100) / 100;
     return totalMinutes;
@@ -177,6 +218,14 @@ const LapProvider = ({ children }) => {
         getTotalTimeSpent,
         getTotalTimeSpentSeconds,
         getTotalBreakTimeSpentMinutes,
+        showAmount,
+        setShowAmount,
+        showStatsBeforeLaps,
+        setShowStatsBeforeLaps,
+        updateShowAmount,
+        updateShowStatsBeforeLaps,
+        updateBreaksImpactAmount,
+        updateBreaksImpactTime,
       }}
     >
       {children}
